@@ -1,0 +1,90 @@
+Results of X Query 1.A):
+
+Bud
+2.50
+
+Miller
+3.00
+
+Results of X Query 1.B):
+Miller
+3.00
+
+Results of 3.A):
+xquery version "3.0";
+for $actor in MOVIES/MOVIE/ACTORS/ACTOR
+where $actor/AGE < 35
+order by $actor/AGE
+return $actor
+
+Dakota Goyo 
+23 
+Canada 
+
+Result of 3.B):
+xquery version "3.0";
+for $movie in MOVIES/MOVIE
+where $movie/PRODUCTIONYEAR <= 2018 and $movie/PRODUCTIONYEAR >= 2016
+order by $movie/TITLE descending
+return $movie
+
+
+         Warrior 
+         2011 
+         750000 
+         Gavin O'Connor 
+         8.6 
+         224 
+         
+            
+                 Tom Hardy 
+                 45 
+                 United Kingdom 
+            
+            
+                 Joel Edgerton 
+                 48 
+                 Australia 
+            
+        
+    
+
+         The Avengers 
+         2012 
+         220000000 
+         Joss Whedon 
+         7 
+         2:23 
+         
+            
+                 Robert Downey Jr. 
+                 57 
+                 USA 
+            
+            
+                 Scarlett Johansson
+                 37 
+                 USA 
+            
+        
+    
+
+         Real Steel 
+         2011 
+         110000000 
+         Shawn Levy 
+         7 
+         127 
+         
+            
+                 Hugh Jackman 
+                 54 
+                 Australia 
+            
+            
+                 Dakota Goyo 
+                 23 
+                 Canada 
+            
+            
+    

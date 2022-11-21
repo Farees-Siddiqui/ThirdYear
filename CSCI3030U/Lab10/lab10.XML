@@ -1,0 +1,62 @@
+<MOVIES>
+    <MOVIE>
+        <TITLE> The Avengers </TITLE>
+        <PRODUCTIONYEAR> 2012 </PRODUCTIONYEAR>
+        <BUDGET> 220000000 </BUDGET>
+        <DIRECTOR> Joss Whedon </DIRECTOR>
+        <RATING> 7 </RATING>
+        <DURATION> 2:23 </DURATION>
+        <ACTORS> 
+            <ACTOR>
+                <NAME> Robert Downey Jr. </NAME>
+                <AGE> 57 </AGE>
+                <COUNTRY> USA </COUNTRY>
+            </ACTOR>
+            <ACTOR>
+                <NAME> Scarlett Johansson</NAME>
+                <AGE> 37 </AGE>
+                <COUNTRY> USA </COUNTRY>
+            </ACTOR>
+        </ACTORS>
+    </MOVIE>
+    <MOVIE>
+        <TITLE> Warrior </TITLE>
+        <PRODUCTIONYEAR> 2011 </PRODUCTIONYEAR>
+        <BUDGET> 750000 </BUDGET>
+        <DIRECTOR> Gavin O'Connor </DIRECTOR>
+        <RATING> 8.6 </RATING>
+        <DURATION> 224 </DURATION>
+        <ACTORS> 
+            <ACTOR>
+                <NAME> Tom Hardy </NAME>
+                <AGE> 45 </AGE>
+                <COUNTRY> United Kingdom </COUNTRY>
+            </ACTOR>
+            <ACTOR>
+                <NAME> Joel Edgerton </NAME>
+                <AGE> 48 </AGE>
+                <COUNTRY> Australia </COUNTRY>
+            </ACTOR>
+        </ACTORS>
+    </MOVIE>
+    <MOVIE>
+        <TITLE> Real Steel </TITLE>
+        <PRODUCTIONYEAR> 2011 </PRODUCTIONYEAR>
+        <BUDGET> 110000000 </BUDGET>
+        <DIRECTOR> Shawn Levy </DIRECTOR>
+        <RATING> 7 </RATING>
+        <DURATION> 127 </DURATION>
+        <ACTORS> 
+            <ACTOR>
+                <NAME> Hugh Jackman </NAME>
+                <AGE> 54 </AGE>
+                <COUNTRY> Australia </COUNTRY>
+            </ACTOR>
+            <ACTOR>
+                <NAME> Dakota Goyo </NAME>
+                <AGE> 23 </AGE>
+                <COUNTRY> Canada </COUNTRY>
+            </ACTOR>
+        </ACTORS>
+    </MOVIE>
+</MOVIES>
