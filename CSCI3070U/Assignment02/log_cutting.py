@@ -1,9 +1,15 @@
 import heapq as hq
 import bisect
 
-def cutLog(n, cuts):
+'''
+cuts is the list of cuts to be made to the stick
+cuts[0] is always going to be 0
+cuts[-1] is always going to be the length of the stick
+'''
+def cutLog(cuts):
+   n = cuts.pop()
    res = []
-   cuts = [0] + sorted(cuts) + [n]
+   cuts = sorted(cuts) + [n]
    m = len(cuts)
    cost = [[0]*m for _ in range(m)]
 
@@ -30,7 +36,8 @@ def printCuts(cost, cuts, i, j, res):
          printCuts(cost, cuts, i, k, res)
          return res
 
-def greedyCutLog(n, cuts):
+def greedyCutLog(cuts):
+   n = cuts.pop()
    cuts.sort()
    if len(cuts) <= 1:
       return n
@@ -76,4 +83,4 @@ def greedyCutLog(n, cuts):
       hq.heappush(pq, (-(end - bb), bb))
    return ret
 
-print(f'Dynamic Programming Approach: {cutLog(16, [7,8,9])}\nGreedy Approach (Not optimal): {greedyCutLog(16, [7,8,9])}')
+print(f'Dynamic Programming Approach: {cutLog([0, 7, 8, 9, 16])}\nGreedy Approach (Not optimal): {greedyCutLog([7, 8, 9, 16])}')
