@@ -1,3 +1,6 @@
+import heapq as hq
+import bisect
+
 def cutLog(n, cuts):
    res = []
    cuts = [0] + sorted(cuts) + [n]
@@ -27,4 +30,50 @@ def printCuts(cost, cuts, i, j, res):
          printCuts(cost, cuts, i, k, res)
          return res
 
-print(cutLog(7, [1, 3, 4, 5]))
+def greedyCutLog(n, cuts):
+   cuts.sort()
+   if len(cuts) <= 1:
+      return n
+   ret = 0
+   pq = []
+   hq.heappush(pq, (-n, 0))
+   while pq:
+      length, begin = hq.heappop(pq)
+      length = -length
+      end = begin + length
+      if length == 1:
+         continue
+      it = bisect.bisect_left(cuts, begin + 1)
+      it1 = bisect.bisect_left(cuts, end - 1)
+      if it == len(cuts) and it1 == len(cuts):
+         continue
+      best = begin + length / 2.0
+      bb = begin + length // 2
+      it3 = bisect.bisect_left(cuts, bb)
+      if it3 == len(cuts):
+         bb = cuts[-1]
+         cuts.pop()
+      else:
+         idx = it3
+         best_idx = idx
+         if cuts[idx] < end:
+            bb = cuts[idx]
+         elif idx == 0 or cuts[idx - 1] < begin:
+            continue
+         else:
+            bb = cuts[idx - 1]
+            best_idx = idx - 1
+         if idx + 1 < len(cuts) and cuts[idx + 1] < end and cuts[idx + 1] > begin:
+            if abs(cuts[idx] - best) > abs(cuts[idx + 1] - best):
+               best_idx = idx + 1
+         if idx - 1 >= 0 and cuts[idx - 1] > begin and cuts[idx - 1] < end:
+            if abs(cuts[idx] - best) > abs(cuts[idx - 1] - best):
+               best_idx = idx - 1
+         bb = cuts[best_idx]
+         cuts.pop(best_idx)
+      ret += length
+      hq.heappush(pq, (-(bb - begin), begin))
+      hq.heappush(pq, (-(end - bb), bb))
+   return ret
+
+print(f'Dynamic Programming Approach: {cutLog(16, [7,8,9])}\nGreedy Approach (Not optimal): {greedyCutLog(16, [7,8,9])}')
