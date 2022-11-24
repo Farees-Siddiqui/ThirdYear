@@ -69,13 +69,18 @@ def getEncodedSize(root):
             stack.append(node.left)
     return sum
 
-def getFileSize(fileName):
-    res = []
-    with open(fileName, 'r') as f:
-        return len(f.read())
-        
+def getFileSize(freq):
+    chars = list(freq.keys())
+    frequencies = list(freq.values())
+    print(f'chars: {chars} | frequencies: {frequencies}')
+    res = {}
+    for i in range(len(chars)):
+        print(f'{chars[i]}: {frequencies[i]}')
+        res[chars[i]] = len(''.join(format(ord(chars[i]), '08b'))) * frequencies[i]
+    return sum(res.values())
+    
 
 frequencies = getFreqFromFile('huffman.txt')
 Q = huffman(frequencies)
 printCodes(Q)
-print(f'Before Encoding: {getFileSize("huffman.txt")} bits -> After Encoding: {getEncodedSize(Q)} bits')
+print(f'Before Huffman Encoding: {getFileSize(frequencies)} bits -> After Encoding: {getEncodedSize(Q)} bits')
