@@ -30,7 +30,7 @@ def printCuts(cost, cuts, i, j, res):
       return
    for k in range(i+1, j):
       if cost[i][j] == cost[i][k] + cost[k][j] + cuts[j] - cuts[i]:
-         print("Cut at: ", cuts[k])
+         # print("Cut at: ", cuts[k])
          res.append(cuts[k])
          printCuts(cost, cuts, k, j, res)
          printCuts(cost, cuts, i, k, res)
@@ -42,10 +42,10 @@ def greedyCutLog(cuts):
    if len(cuts) <= 1:
       return n
    ret = 0
-   pq = []
-   hq.heappush(pq, (-n, 0))
-   while pq:
-      length, begin = hq.heappop(pq)
+   priorityq = []
+   hq.heappush(priorityq, (-n, 0))
+   while priorityq:
+      length, begin = hq.heappop(priorityq)
       length = -length
       end = begin + length
       if length == 1:
@@ -79,8 +79,10 @@ def greedyCutLog(cuts):
          bb = cuts[best_idx]
          cuts.pop(best_idx)
       ret += length
-      hq.heappush(pq, (-(bb - begin), begin))
-      hq.heappush(pq, (-(end - bb), bb))
+      hq.heappush(priorityq, (-(bb - begin), begin))
+      hq.heappush(priorityq, (-(end - bb), bb))
    return ret
 
-print(f'Dynamic Programming Approach: {cutLog([0, 7, 8, 9, 16])}\nGreedy Approach (Not optimal): {greedyCutLog([7, 8, 9, 16])}')
+cost, cuts = cutLog([0, 7, 8, 9, 16])
+
+print(f'Dynamic Programming Approach: (Cost -> {cost} | Optimal Cuts -> {cuts})\nGreedy Approach (Not optimal): {greedyCutLog([7, 8, 9, 16])}')

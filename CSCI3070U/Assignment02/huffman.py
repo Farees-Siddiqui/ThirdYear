@@ -1,5 +1,4 @@
 import heapq as hq
-
 class Node:
     def __init__(self, freq, symbol, left=None, right=None):
         self.freq = freq
@@ -72,15 +71,14 @@ def getEncodedSize(root):
 def getFileSize(freq):
     chars = list(freq.keys())
     frequencies = list(freq.values())
-    print(f'chars: {chars} | frequencies: {frequencies}')
     res = {}
     for i in range(len(chars)):
-        print(f'{chars[i]}: {frequencies[i]}')
         res[chars[i]] = len(''.join(format(ord(chars[i]), '08b'))) * frequencies[i]
     return sum(res.values())
-    
 
 frequencies = getFreqFromFile('huffman.txt')
 Q = huffman(frequencies)
 printCodes(Q)
 print(f'Before Huffman Encoding: {getFileSize(frequencies)} bits -> After Encoding: {getEncodedSize(Q)} bits')
+
+# implement a function for calculating the fixed length huffman code for a file
