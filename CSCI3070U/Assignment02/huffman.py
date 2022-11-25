@@ -1,3 +1,9 @@
+'''
+November 15, 2022
+Farees Siddiqui - 100780513
+Nicholas Kissoon - 100742790
+'''
+
 import heapq as hq
 class Node:
     def __init__(self, freq, symbol, left=None, right=None):

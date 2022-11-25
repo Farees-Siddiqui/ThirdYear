@@ -1,9 +1,8 @@
 '''
 November 15, 2022
 Farees Siddiqui - 100780513
-Nicholas Kisson - 100742790
+Nicholas Kissoon - 100742790
 '''
-
 import random
 
 # stable version of the insertion sort algorithm
@@ -24,6 +23,9 @@ def getDigit(number, digit):
 
 # radix sort
 def radixSort(array):
+    maxNum = max(array)
+    if maxNum > 999999:
+        raise ValueError("Number has more than 6 digits")
     for i in range(1, 7):
         array = stableInsertionSort(array, i)
 

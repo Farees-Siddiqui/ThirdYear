@@ -2,11 +2,17 @@ import heapq as hq
 import bisect
 
 '''
+November 15, 2022
+Farees Siddiqui - 100780513
+Nicholas Kissoon - 100742790
+'''
+
+'''
 cuts is the list of cuts to be made to the stick
 cuts[0] is always going to be 0
 cuts[-1] is always going to be the length of the stick
 '''
-def cutLog(cuts):
+def cutLog(cuts): # [7, 8, 9, 16]
    n = cuts.pop()
    res = []
    cuts = sorted(cuts) + [n]
@@ -41,48 +47,48 @@ def greedyCutLog(cuts):
    cuts.sort()
    if len(cuts) <= 1:
       return n
-   ret = 0
+   res= 0
    priorityq = []
    hq.heappush(priorityq, (-n, 0))
    while priorityq:
-      length, begin = hq.heappop(priorityq)
+      length, beginCurPiece = hq.heappop(priorityq)
       length = -length
-      end = begin + length
+      endCurPiece = beginCurPiece + length
       if length == 1:
          continue
-      it = bisect.bisect_left(cuts, begin + 1)
-      it1 = bisect.bisect_left(cuts, end - 1)
-      if it == len(cuts) and it1 == len(cuts):
+      idxCutRight= bisect.bisect_left(cuts, beginCurPiece + 1)
+      idxCutLeft= bisect.bisect_left(cuts, endCurPiece - 1)
+      if idxCutRight== len(cuts) and idxCutLeft== len(cuts):
          continue
-      best = begin + length / 2.0
-      bb = begin + length // 2
-      it3 = bisect.bisect_left(cuts, bb)
+      bestCut = beginCurPiece + length / 2.0
+      currCut = beginCurPiece + length // 2
+      it3 = bisect.bisect_left(cuts, currCut)
       if it3 == len(cuts):
-         bb = cuts[-1]
+         currCut = cuts[-1]
          cuts.pop()
       else:
          idx = it3
-         best_idx = idx
-         if cuts[idx] < end:
-            bb = cuts[idx]
-         elif idx == 0 or cuts[idx - 1] < begin:
+         bestCut_idx = idx
+         if cuts[idx] < endCurPiece:
+            currCut = cuts[idx]
+         elif idx == 0 or cuts[idx - 1] < beginCurPiece:
             continue
          else:
-            bb = cuts[idx - 1]
-            best_idx = idx - 1
-         if idx + 1 < len(cuts) and cuts[idx + 1] < end and cuts[idx + 1] > begin:
-            if abs(cuts[idx] - best) > abs(cuts[idx + 1] - best):
-               best_idx = idx + 1
-         if idx - 1 >= 0 and cuts[idx - 1] > begin and cuts[idx - 1] < end:
-            if abs(cuts[idx] - best) > abs(cuts[idx - 1] - best):
-               best_idx = idx - 1
-         bb = cuts[best_idx]
-         cuts.pop(best_idx)
-      ret += length
-      hq.heappush(priorityq, (-(bb - begin), begin))
-      hq.heappush(priorityq, (-(end - bb), bb))
-   return ret
+            currCut = cuts[idx - 1]
+            bestCut_idx = idx - 1
+         if idx + 1 < len(cuts) and cuts[idx + 1] < endCurPiece and cuts[idx + 1] > beginCurPiece:
+            if abs(cuts[idx] - bestCut) > abs(cuts[idx + 1] - bestCut):
+               bestCut_idx = idx + 1
+         if idx - 1 >= 0 and cuts[idx - 1] > beginCurPiece and cuts[idx - 1] < endCurPiece:
+            if abs(cuts[idx] - bestCut) > abs(cuts[idx - 1] - bestCut):
+               bestCut_idx = idx - 1
+         currCut = cuts[bestCut_idx]
+         cuts.pop(bestCut_idx)
+      res+= length
+      hq.heappush(priorityq, (-(currCut - beginCurPiece), beginCurPiece))
+      hq.heappush(priorityq, (-(endCurPiece - currCut), currCut))
+   return res
 
-cost, cuts = cutLog([0, 7, 8, 9, 16])
+cost, cuts = cutLog([0, 1, 3, 4, 5, 7])
 
-print(f'Dynamic Programming Approach: (Cost -> {cost} | Optimal Cuts -> {cuts})\nGreedy Approach (Not optimal): {greedyCutLog([7, 8, 9, 16])}')
+print(f'Dynamic Programming Approach: (Cost -> {cost} | Optimal Cuts -> {cuts})\nGreedy Approach (Not optimal): {greedyCutLog([0, 1, 3, 4, 5, 7])}')
