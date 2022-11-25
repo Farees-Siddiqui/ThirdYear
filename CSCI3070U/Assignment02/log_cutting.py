@@ -24,7 +24,7 @@ def cutLog(cuts): # [7, 8, 9, 16]
          j = i + k
          if j >= m:
             continue
-         cost[i][j] = (cuts[j]-cuts[i]) + min(cost[i][s] + cost[s][j] for s in range(i+1, j))
+         cost[i][j] = (cuts[j]-cuts[i]) + min(cost[i][k] + cost[k][j] for k in range(i+1, j))
 
    
    return cost[0][m-1], printCuts(cost, cuts, 0, m-1, res)
@@ -89,6 +89,6 @@ def greedyCutLog(cuts):
       hq.heappush(priorityq, (-(endCurPiece - currCut), currCut))
    return res
 
-cost, cuts = cutLog([0, 1, 3, 4, 5, 7])
+cost, cuts = cutLog([0, 7 ,8, 9, 16])
 
-print(f'Dynamic Programming Approach: (Cost -> {cost} | Optimal Cuts -> {cuts})\nGreedy Approach (Not optimal): {greedyCutLog([0, 1, 3, 4, 5, 7])}')
+print(f'Dynamic Programming Approach: (Cost -> {cost} | Optimal Cuts -> {cuts})\nGreedy Approach (Not optimal): {greedyCutLog([0, 7 ,8, 9, 16])}')
