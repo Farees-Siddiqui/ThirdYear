@@ -61,7 +61,6 @@ INSERT INTO "University" VALUES --
     ('University of Toronto', (SELECT "directorID" FROM "Director" WHERE "Director.fName-lName" = "RussoAnthony"), 'Arts and Science', 72389, false, 'white-blue', 'The University of Toronto is a public research university in Toronto, Ontario, Canada, located on the grounds that surround Queens Park. It was founded by royal charter in 1827 as Kings College, the first institution of higher learning in Upper Canada'),
     ('Queens University', (SELECT "directorID" FROM "Director" WHERE "Director.fName-lName" = "RussoJoe"), 'Computing', 24143, false, 'blue-gold-red', 'Queens University at Kingston, commonly known as Queens University or simply Queens, is a public research university in Kingston, Ontario, Canada. Queens holds more than 1,400 hectares of land throughout Ontario and owns Herstmonceux Castle in East Sussex, England'),
     ('Princeton University', (SELECT "directorID" FROM "Director" WHERE "Director.fName-lName" = "BodenAnna"), 'Science', 8623, true, 'black-orange', 'Princeton University is a private Ivy League research university in Princeton, New Jersey. Founded in 1746 in Elizabeth as the College of New Jersey, Princeton is the fourth-oldest institution of higher education in the United States and one of the nine colonial colleges chartered before the American Revolution.');
-    (uuid_generate_v4(), (SELECT "locationID" FROM "location" WHERE city = 'Miami'),'BodenAnna', 1979);
 
 INSERT INTO "movie genre" VALUES --
     ((SELECT "movieID" FROM "Movie" WHERE "movieTitle" = 'Black Panther'), 'Action'),
@@ -106,9 +105,3 @@ INSERT INTO "movie cast" VALUES --
     ((SELECT "movieID" FROM "Movie" WHERE "movieTitle" = 'Avengers: Age of Ultron'), (SELECT "actorID" FROM "Actor" WHERE "fName-lName" = 'Johansson-Scarlett')),
     ((SELECT "movieID" FROM "Movie" WHERE "movieTitle" = 'The Avengers'), (SELECT "actorID" FROM "Actor" WHERE "fName-lName" = 'Ruffalo-Mark'));
 
-
---Find all the pairs of actors who have blue eye color. Produce pairs in alphabetic order, e.g., (Howard before Lynch) and do not produce pairs like (Lynch, Lynch
-SELECT "fName-lName" AS "Actor 1", "fName-lName" AS "Actor 2" FROM "Actor" WHERE "eyeColor" = 'Blue' AND "fName-lName" < "fName-lName";
-
--- find all movies that have actors born in atleast 2 different countries
-SELECT "movieTitle" FROM "Movie" WHERE "movieID" IN (SELECT "movieID" FROM "movie cast" WHERE "actorID" IN (SELECT "actorID" FROM "Actor" WHERE "country" = 'USA')) AND "movieID" IN (SELECT "movieID" FROM "movie cast" WHERE "actorID" IN (SELECT "actorID" FROM "Actor" WHERE "country" = 'Canada'));

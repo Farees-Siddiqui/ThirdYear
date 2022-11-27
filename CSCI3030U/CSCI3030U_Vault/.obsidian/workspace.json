@@ -1,0 +1,144 @@
+{
+  "main": {
+    "id": "73e7a2ddcd0141f2",
+    "type": "split",
+    "children": [
+      {
+        "id": "f7c59bf9ac17adb0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "12fa4b502dc0c33a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Project02/Farees Siddiqui Project 2 (Lab 5-10).md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "908bd29e5e6f5b81",
+    "type": "split",
+    "children": [
+      {
+        "id": "87dfd87fa8c431c3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "76c61fb7d012f101",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "dedcc89a3ed04f92",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "6541abff8daec9cc",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d1ee4386ab13b912",
+    "type": "split",
+    "children": [
+      {
+        "id": "30d4dd82773a509d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bf25ba5b128a9547",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Project02/Farees Siddiqui Project 2 (Lab 5-10).md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "786fac99e40d7949",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Project02/Farees Siddiqui Project 2 (Lab 5-10).md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "f1925cc6c6d2a7a6",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "dfa9de9663c533ee",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Project02/Farees Siddiqui Project 2 (Lab 5-10).md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "12fa4b502dc0c33a",
+  "lastOpenFiles": [
+    "2022-11-27.md",
+    "Project02/Farees Siddiqui Project 2 (Lab 5-10).md"
+  ]
+}

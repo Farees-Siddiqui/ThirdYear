@@ -406,4 +406,3 @@ ALTER TABLE "movie awards"
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 ;
-

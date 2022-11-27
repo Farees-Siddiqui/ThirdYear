@@ -332,12 +332,12 @@ public class lab09 {
     }
 
     public void getMoviesByDirector(String directorName) {
-        String sql = "SELECT \"movieTitle\" FROM \"Movie\" WHERE \"movieID\" IN (SELECT \"movieID\" FROM \"movieDirector\" WHERE \"directorID\" IN (SELECT \"directorID\" FROM \"Director\" WHERE \"fName-lName\" = '"
-                + directorName + "'))";
+        String sql = "SELECT \"movieTitle\" FROM \"Movie\" WHERE \"movieID\" IN (SELECT \"movieID\" FROM \"movieDirector\" WHERE \"directorID\" IN (SELECT \"directorID\" FROM \"Director\" WHERE \"fName-lName\" = ?))";
         try (Connection conn = connect();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
-            System.out.println("Movies by " + directorName + ":");
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, directorName);
+            ResultSet rs = pstmt.executeQuery();
+            System.out.printf("Movies by [%s]:\n", directorName);
             displayResult(rs);
             System.out.println("----------------");
         } catch (SQLException e) {
@@ -346,11 +346,12 @@ public class lab09 {
     }
 
     public void getActorsWhereProductionIsGreaterThanX(int production) {
-        String sql = "SELECT \"fName-lName\" FROM \"Actor\" WHERE \"actorID\" IN (SELECT \"actorID\" FROM \"movie cast\" WHERE \"movieID\" IN (SELECT \"movieID\" FROM \"Movie\" WHERE \"budget\" > 1000000))";
+        String sql = "SELECT \"fName-lName\" FROM \"Actor\" WHERE \"actorID\" IN (SELECT \"actorID\" FROM \"movie cast\" WHERE \"movieID\" IN (SELECT \"movieID\" FROM \"Movie\" WHERE \"budget\" > ?))";
         try (Connection conn = connect();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
-            System.out.println("Actors with production greater than " + production + ":");
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, production);
+            ResultSet rs = pstmt.executeQuery();
+            System.out.printf("Actors where production is greater than [%d]:\n", production);
             displayResult(rs);
             System.out.println("----------------");
         } catch (SQLException e) {
@@ -359,11 +360,12 @@ public class lab09 {
     }
 
     public void getSimilarDirectorNames(String pattern) {
-        String sql = "SELECT \"fName-lName\" FROM \"Director\" WHERE \"fName-lName\" LIKE '" + pattern + "'";
+        String sql = "SELECT \"fName-lName\" FROM \"Director\" WHERE \"fName-lName\" LIKE ?";
         try (Connection conn = connect();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
-            System.out.println("Similar Director Names:");
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, pattern);
+            ResultSet rs = pstmt.executeQuery();
+            System.out.printf("Similar Director Names to pattern [%s]:\n", pattern);
             displayResult(rs);
             System.out.println("----------------");
         } catch (SQLException e) {
@@ -376,69 +378,78 @@ public class lab09 {
         try {
             app.connect();
             System.out.println("Successful Connection");
-            app.insertFestivals(); // Inserted a new festival, if ran again will insert a duplicate festival with
-                                   // different UUID since festival name is not a unique field
-            app.insertAwards(); // Inserted a new award, if ran again will insert a duplicate award with
-                                // different UUID since award name is not a unique field
 
-            app.insertGenre();
+            // app.insertFestivals(); // Inserted a new festival, if ran again will insert a
 
-            app.insertLocation();
+            // app.insertAwards();
 
-            app.insertDirector();
+            // app.insertGenre();
 
-            app.insertActor();
+            // app.insertLocation();
 
-            app.insertMovie();
+            // app.insertDirector();
 
-            app.insertUniversity();
+            // app.insertActor();
 
-            app.insertCinema();
+            // app.insertMovie();
 
-            app.insertMovieAward();
+            // app.insertUniversity();
 
-            app.insertMovieCast();
+            // app.insertCinema();
 
-            app.insertPlayedIn();
+            // app.insertMovieAward();
 
-            app.insertMovieDirector();
+            // app.insertMovieCast();
 
-            app.insertFestivals("uuid_generate_v4()", "'Test Festival 2'");
-            app.insertAwards("uuid_generate_v4()", "'Test Award 2'", "'Test Award Category 2'");
+            // app.insertPlayedIn();
 
-            app.insertGenre("'Test Genre 2'", "'Test Genre 2 Description'");
+            // app.insertMovieDirector();
 
-            app.insertLocation("uuid_generate_v4()", "'Test Location 2 City'", "'Test Location 2 State'",
-                    "'Test Location 2 Country'");
+            // app.insertFestivals("uuid_generate_v4()", "'Test Festival 2'");
 
-            app.insertDirector("uuid_generate_v4()",
-                    "(SELECT \"locationID\" FROM \"location\" WHERE city = 'Test Location 2 City')",
-                    "'Test Director 2 Name'", 1990);
+            // app.insertAwards("uuid_generate_v4()", "'Test Award 2'", "'Test Award
+            // Category 2'");
 
-            app.insertActor("ARRAY[uuid_generate_v4()]",
-                    "(SELECT \"locationID\" FROM \"location\" WHERE city = 'Test Location 2 City')", "NULL",
-                    "'1978-05-17'", "'Test Actor 2 Name'", "Black");
+            // app.insertGenre("'Test Genre 2'", "'Test Genre 2 Description'");
 
-            app.insertMovie("uuid_generate_v4()",
-                    "(SELECT \"festivalID\" FROM \"Festivals\" WHERE \"festivalName\" = 'Test Festival 2')",
-                    "'Test Movie 2 Name'", "'2022-12-30'", 4, 256000000, 479750834);
+            // app.insertLocation("uuid_generate_v4()", "'Test Location 2 City'", "'Test
+            // Location 2 State'",
+            // "'Test Location 2 Country'");
 
-            app.insertUniversity("'Test University 2 Name'",
-                    "(SELECT \"directorID\" FROM \"Director\" WHERE \"fName-lName\" = 'Test Director Name')", "'Arts'",
-                    31000, "false", "'yellow-green'", "'Test University 2 Description'");
+            // app.insertDirector("uuid_generate_v4()",
+            // "(SELECT \"locationID\" FROM \"location\" WHERE city = 'Test Location 2
+            // City')",
+            // "'Test Director 2 Name'", 1990);
 
-            app.insertCinema("uuid_generate_v4()",
-                    "(SELECT \"locationID\" FROM \"location\" WHERE city = 'Test Location 2 City')",
-                    "'Test Cinema 2 Name'");
+            // app.insertActor("ARRAY[uuid_generate_v4()]",
+            // "(SELECT \"locationID\" FROM \"location\" WHERE city = 'Test Location 2
+            // City')", "NULL",
+            // "'1978-05-17'", "'Test Actor 2 Name'", "Black");
 
-            app.insertMovieAward("'7827b6e1-fbdd-43b4-b220-a607e99028f9'",
-                    "(SELECT \"AwardID\" FROM \"Awards\" WHERE \"awardName\" = 'Test Award 2')");
+            // app.insertMovie("uuid_generate_v4()",
+            // "(SELECT \"festivalID\" FROM \"Festivals\" WHERE \"festivalName\" = 'Test
+            // Festival 2')",
+            // "'Test Movie 2 Name'", "'2022-12-30'", 4, 256000000, 479750834);
 
-            app.insertMovieCast("'7827b6e1-fbdd-43b4-b220-a607e99028f9'",
-                    "'{e9838673-fca8-486b-a067-caf69f34437a}'");
+            // app.insertUniversity("'Test University 2 Name'",
+            // "(SELECT \"directorID\" FROM \"Director\" WHERE \"fName-lName\" = 'Test
+            // Director Name')", "'Arts'",
+            // 31000, "false", "'yellow-green'", "'Test University 2 Description'");
 
-            app.insertPlayedIn("'7827b6e1-fbdd-43b4-b220-a607e99028f9'",
-                    "(SELECT \"CinemaID\" FROM \"Cinema\" WHERE \"cinemaName\" = 'Test Cinema 2 Name')");
+            // app.insertCinema("uuid_generate_v4()",
+            // "(SELECT \"locationID\" FROM \"location\" WHERE city = 'Test Location 2
+            // City')",
+            // "'Test Cinema 2 Name'");
+
+            // app.insertMovieAward("'7827b6e1-fbdd-43b4-b220-a607e99028f9'",
+            // "(SELECT \"AwardID\" FROM \"Awards\" WHERE \"awardName\" = 'Test Award 2')");
+
+            // app.insertMovieCast("'7827b6e1-fbdd-43b4-b220-a607e99028f9'",
+            // "'{e9838673-fca8-486b-a067-caf69f34437a}'");
+
+            // app.insertPlayedIn("'7827b6e1-fbdd-43b4-b220-a607e99028f9'",
+            // "(SELECT \"CinemaID\" FROM \"Cinema\" WHERE \"cinemaName\" = 'Test Cinema 2
+            // Name')");
 
             System.out.println("-----Festivals-----");
             app.getTable("Festivals");
@@ -470,6 +481,8 @@ public class lab09 {
             app.getTable("movie genre");
             System.out.println("-----Ticket-----");
             app.getTable("Ticket");
+
+            System.out.println("\n-----Database Queries-----\n");
 
             // Queries
             app.getCanadianDirectors();

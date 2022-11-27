@@ -5,7 +5,8 @@
 SELECT AVG(AGE(CURRENT_DATE, "dateOfBirth"))  as "average age" FROM "Actor";
 
 -- 1 b) Find the number of different countries in which actors from the movie “The Avengers” were born
-SELECT COUNT(DISTINCT "country") FROM "Actor" WHERE "id" IN (SELECT "actorId" FROM "MovieActor" WHERE "movieId" IN (SELECT "id" FROM "Movie" WHERE "title" = 'The Avengers'));
+SELECT COUNT(DISTINCT "location"."country") FROM "location", "Actor", "Movie", "movie cast"
+	WHERE "Movie"."movieID" = (SELECT "movieID" FROM "Movie" WHERE "movieTitle" = 'The Avengers')
 
 -- 1 c) Find the number of actors with Dark Brown eyes
 SELECT COUNT(*) FROM "Actor" WHERE "eyecolour" = 'Dark Brown';
@@ -41,15 +42,15 @@ WHERE "movieID" IN
 	);
 
 -- 1 g) Find all the movies that have actors born in atleast 2 different countries (this answer seems very wrong)
-SELECT DISTINCT "movieTitle", "Actor"."locationID" 
-FROM (("Movie"
-	  INNER JOIN "movie cast" ON "Movie"."movieID" = "movie cast"."movieID")
-	  INNER JOIN "Actor" ON "Actor"."actorID" = "movie cast"."actorID")
-WHERE "Actor"."actorID" in (SELECT "actorID" FROM "movie cast")
+SELECT "movieID" FROM "movie cast"
+WHERE "actorID" IN (SELECT "actorID" FROM "Actor"
+WHERE "locationID" IN (SELECT "locationID" FROM "location"
+WHERE "country" IN (SELECT "country" FROM "location" GROUP BY "country" HAVING COUNT("country") > 2)));
 
 
 -- 1 h) Find how many awards each movie in total has received and rank the movies (display the title) by the amount of awards
-SELECT "movieTitle", COUNT(*)
-    FROM "Movie", "movie awards"
-    WHERE "movie awards"."movieID" = "Movie"."movieID"
-GROUP BY "movieTitle";
+SELECT "Movie"."movieTitle", COUNT("movie awards"."movieID") AS "awards" 
+	FROM "Movie" 
+	INNER JOIN "movie awards" ON "Movie"."movieID" = "movie awards"."movieID" 
+	GROUP BY "Movie"."movieTitle" 
+	ORDER BY "awards" DESC;
