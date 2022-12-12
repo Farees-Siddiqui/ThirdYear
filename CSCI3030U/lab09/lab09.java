@@ -451,6 +451,8 @@ public class lab09 {
             // "(SELECT \"CinemaID\" FROM \"Cinema\" WHERE \"cinemaName\" = 'Test Cinema 2
             // Name')");
 
+            app.insertFestivals2("uuid_generate_v4()", "'Test Festival 3'");
+
             System.out.println("-----Festivals-----");
             app.getTable("Festivals");
             System.out.println("------Awards-------");
