@@ -1,0 +1,49 @@
+<!-- Consider a database for a bank, including information about customers and their accounts. Information 
+about a customer includes their name, address, phone, and Social Security number. Accounts have 
+numbers, types (e.g., savings, checking) and balances. 
+a. How a typical data about banks and customers could be represented as a DTD. (2 Points)
+b. Provide a sample XML document for the provided DTD. In your XML document include 
+information about 2 customers and for each customer provide sample 1 account (2 Points) -->
+
+<!DOCTYPE BANK[
+    <!ELEMENT BANK (CUSTOMER+)>
+    <!ELEMENT CUSTOMER (NAME, ADDRESS, PHONE, SSN, ACCOUNT+)>
+    <!ELEMENT NAME (#PCDATA)>
+    <!ELEMENT ADDRESS (#PCDATA)>
+    <!ELEMENT PHONE (#PCDATA)>
+    <!ELEMENT SSN (#PCDATA)>
+    <!ELEMENT ACCOUNT (ACCOUNT_NUMBER, ACCOUNT_TYPE, BALANCE)>
+    <!ELEMENT ACCOUNT_NUMBER (#PCDATA)>
+    <!ELEMENT ACCOUNT_TYPE (#PCDATA)>
+    <!ELEMENT BALANCE (#PCDATA)>
+
+    <!ATTLIST CUSTOMER ID ID #REQUIRED>
+    <!ATTLIST ACCOUNT ID ID #REQUIRED>
+
+]>
+
+<!-- b. Provide a sample XML document for the provided DTD. In your XML document include information about 2 customers and for each customer provide sample 1 account (2 Points) -->
+
+<BANK>
+    <CUSTOMER ID="1">
+        <NAME>John Smith</NAME>
+        <ADDRESS>123 Main St.</ADDRESS>
+        <PHONE>123-456-7890</PHONE>
+        <SSN>123-45-6789</SSN>
+        <ACCOUNT ID="1">
+            <ACCOUNT_NUMBER>123456789</ACCOUNT_NUMBER>
+            <ACCOUNT_TYPE>Savings</ACCOUNT_TYPE>
+            <BALANCE>1000</BALANCE>
+        </ACCOUNT>
+    </CUSTOMER>
+    <CUSTOMER ID="2">
+        <NAME>Jane Doe</NAME>
+        <ADDRESS>456 Main St.</ADDRESS>
+        <PHONE>123-456-7890</PHONE>
+        <SSN>123-45-6789</SSN>
+        <ACCOUNT ID="2">
+            <ACCOUNT_NUMBER>123456789</ACCOUNT_NUMBER>
+            <ACCOUNT_TYPE>Checking</ACCOUNT_TYPE>
+            <BALANCE>1000</BALANCE>
+        </ACCOUNT>
+    </CUSTOMER>

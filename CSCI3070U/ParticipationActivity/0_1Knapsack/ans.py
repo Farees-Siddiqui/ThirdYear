@@ -11,7 +11,7 @@ def Knapsack01(weights, profits, maxWeight):
         maxWeight (int): max weight of knapsack
     """    
     n = len(weights)
-    B = [[0 for _ in range(maxWeight)] for _ in range(n)]
+    B = [[0 for _ in range(maxWeight+1)] for _ in range(n)]
     
     for w in range(maxWeight):
         B[0][w] = 0
