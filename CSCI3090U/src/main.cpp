@@ -84,8 +84,8 @@ void init() {
 	/*
 	 *  compile and build the shader program
 	 */
-	vs = buildShader(GL_VERTEX_SHADER, (char*)"example4.vs");
-	fs = buildShader(GL_FRAGMENT_SHADER, (char*)"example4.fs");
+	vs = buildShader(GL_VERTEX_SHADER, (char*)"../src/example4.vs");
+	fs = buildShader(GL_FRAGMENT_SHADER, (char*)"../src/example4.fs");
 	program = buildProgram(vs,fs,0);
 
 	/*
@@ -227,7 +227,7 @@ int main(int argc, char **argv) {
 	}
 
 	glEnable(GL_DEPTH_TEST);
-	glClearColor(1.0, 1.0, 1.0, 1.0);
+	glClearColor(0, 0.6, 0.7, 0.8);
 	glViewport(0, 0, 512, 512);
 
 	projection = glm::perspective(0.7f, 1.0f, 1.0f, 100.0f);

@@ -8,7 +8,7 @@ in vec3 normal;
 void main() {
 	vec3 N;
 	vec3 L = vec3(0.0, 0.0, 1.0);
-	vec4 colour = vec4(1.0, 0.0, 0.0, 1.0);
+	vec4 colour = vec4(1.0, 0.8, 0.5, 1.0);
 	float diffuse;
 
 	N = normalize(normal);

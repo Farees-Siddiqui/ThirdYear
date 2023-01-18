@@ -1,12 +1,11 @@
-all:
-    compile link
+all: compile link
 
 compile:
-    clang++ -I../include -c ../src/*.cpp
+	g++ -I../include -c ../src/*.cpp 
 
-link:
-    clang++ *.o -o Lab01 -L../lib -lglfw3
+link: 
+	g++ *.o -o example -L../lib -lglfw3dll -lopengl32 -lgdi32 -lglew32 -lglu32 -lm
 
-clean:
+clean: 
+	rm *.exe
 	rm *.o
-    rm *.out
