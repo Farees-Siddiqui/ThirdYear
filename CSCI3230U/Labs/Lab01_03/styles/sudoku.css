@@ -1,4 +1,9 @@
 /* add your styling and layout CSS here */
+body {
+    background-color: rgb(59, 54, 54);
+    height: 100vh;
+  }
+
 td {
     width: 7vh;
     height: 7vh;
@@ -6,7 +11,7 @@ td {
 
 }
 
-td:hover {
+td:hover{
     background-color: #F5DD90;
 }
 
