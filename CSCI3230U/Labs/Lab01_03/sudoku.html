@@ -14,6 +14,7 @@
 
 <body>
     <!-- your content goes here -->
+
     <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="#">
@@ -49,109 +50,7 @@
         <h1 id="title"> <b>Sudoku</b></h1>
         <!-- <hr> -->
         <div class="table-container">
-            <table class="is-hoverable mainBoard" cellpaddibg="0" cellspacing="0" id="board">
-                <tbody>
-                    <tr class="mainBoard">
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard">1</td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard">9</td>
-                        <td class = "mainBoard"></td>
-                    </tr>
-                    <tr class="mainBoard">
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard">4</td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard">2</td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                    </tr>
-                    <tr class="mainBoard">
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard">8</td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard">5</td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                    </tr>
-                    <tr class="mainBoard">
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard">3</td>
-                        <td class = "mainBoard"></td>
-                    </tr>
-                    <tr class="mainBoard">
-                        <td class = "mainBoard">2</td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard">4</td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard">1</td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                    </tr>
-                    <tr class="mainBoard">
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                    </tr>
-                    <tr class="mainBoard">
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard">1</td>
-                        <td class = "mainBoard">8</td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard">6</td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                    </tr>
-                    <tr class="mainBoard">
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard">3</td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard">8</td>
-                        <td class = "mainBoard"></td>
-                    </tr>
-                    <tr class="mainBoard">
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard">6</td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                        <td class = "mainBoard"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <table class="is-hoverable mainBoard" cellpaddibg="0" cellspacing="0" id="board"></table>
         </div>
     </center>
 
@@ -159,23 +58,21 @@
         <table id="numbers">
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
-                    <td><img src="images/undo.png" alt="urMom"></td>
+                    <td class="numbers">1</td>
+                    <td class="numbers">2</td>
+                    <td class="numbers">3</td>
+                    <td class="numbers">4</td>
+                    <td class="numbers">5</td>
+                    <td class="numbers">6</td>
+                    <td class="numbers">7</td>
+                    <td class="numbers">8</td>
+                    <td class="numbers">9</td>
+                    <td class="numbers" id="undo"><img src="images/undo.png" alt="urMom"></td>
                 </tr>
             </tbody>
         </table>
     </center>
-
-
-
+    <script src="scripts/sudoku.js"></script>
 </body>
 
 </html>

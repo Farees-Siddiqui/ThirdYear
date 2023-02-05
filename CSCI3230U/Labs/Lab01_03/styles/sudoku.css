@@ -8,7 +8,14 @@ td {
     width: 7vh;
     height: 7vh;
     border: 1px solid #000;
+}
 
+.user-input {
+    background-color: #f2f2f2;
+}
+
+.error {
+    background-color: #f76c5e;
 }
 
 td:hover{
@@ -64,6 +71,11 @@ table.mainBoard {
     #board td {
         text-align: center;
         font-size: 20px;
+    }
+
+    td.numbers {
+        text-align: center;
+        font-size: 30px;
     }
 
     /* make the table smaller for mobile devices */
