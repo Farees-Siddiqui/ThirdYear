@@ -230,7 +230,7 @@ int main(int argc, char **argv)
 
 	// create the window used by our application
 
-	window = glfwCreateWindow(512, 512, "Example Four", NULL, NULL);
+	window = glfwCreateWindow(512, 512, "Lab01", NULL, NULL);
 	glEnable(GL_DEPTH_TEST);
 
 	if (!window)
