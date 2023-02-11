@@ -232,7 +232,7 @@ void buildModel() {
 
 	// Start with the bunny, rotate it so it has the same orientation as the monkey
 
-	mesh = loadOBJ((char*)"../src/bunny.obj");
+	mesh = loadOBJ((char*)"../src/drip_vase.obj");
 	mesh->model = glm::translate(glm::mat4(1.0), glm::vec3(0.0, 0.0, 0.0));
 	mesh->model = glm::rotate(mesh->model, 1.57f, glm::vec3(1.0, 0.0, 0.0));
 	mesh->program = program;
@@ -334,26 +334,83 @@ void display() {
  *  Called each time a key is pressed on
  *  the keyboard.
  */
-static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+// static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+// {
+// 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+// 		glfwSetWindowShouldClose(window, GLFW_TRUE);
+
+// 	if (key == GLFW_KEY_A && action == GLFW_PRESS)
+// 		phi -= 0.1;
+// 	if (key == GLFW_KEY_D && action == GLFW_PRESS)
+// 		phi += 0.1;
+// 	if (key == GLFW_KEY_W && action == GLFW_PRESS)
+// 		theta += 0.1;
+// 	if (key == GLFW_KEY_S && action == GLFW_PRESS)
+// 		theta -= 0.1;
+
+// 	eyex = (float)(r*sin(theta)*cos(phi));
+// 	eyey = (float)(r*sin(theta)*sin(phi));
+// 	eyez = (float)(r*cos(theta));
+
+// //	printf("%f %f %f %f %f\n", theta, phi, eyex, eyey, eyez);
+
+// }
+
+
+// Add a flag to keep track of whether the key is being held down
+int keyA_held = 0, keyD_held = 0, keyW_held = 0, keyS_held = 0;
+
+// Change the key callback function to set the flags when the keys are pressed or released
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GLFW_TRUE);
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, GLFW_TRUE);
 
-	if (key == GLFW_KEY_A && action == GLFW_PRESS)
-		phi -= 0.1;
-	if (key == GLFW_KEY_D && action == GLFW_PRESS)
-		phi += 0.1;
-	if (key == GLFW_KEY_W && action == GLFW_PRESS)
-		theta += 0.1;
-	if (key == GLFW_KEY_S && action == GLFW_PRESS)
-		theta -= 0.1;
+    if (key == GLFW_KEY_A)
+    {
+        if (action == GLFW_PRESS)
+            keyA_held = 1;
+        if (action == GLFW_RELEASE)
+            keyA_held = 0;
+    }
+    if (key == GLFW_KEY_D)
+    {
+        if (action == GLFW_PRESS)
+            keyD_held = 1;
+        if (action == GLFW_RELEASE)
+            keyD_held = 0;
+    }
+    if (key == GLFW_KEY_W)
+    {
+        if (action == GLFW_PRESS)
+            keyW_held = 1;
+        if (action == GLFW_RELEASE)
+            keyW_held = 0;
+    }
+    if (key == GLFW_KEY_S)
+    {
+        if (action == GLFW_PRESS)
+            keyS_held = 1;
+        if (action == GLFW_RELEASE)
+            keyS_held = 0;
+    }
+}
 
-	eyex = (float)(r*sin(theta)*cos(phi));
-	eyey = (float)(r*sin(theta)*sin(phi));
-	eyez = (float)(r*cos(theta));
+// Add a polling loop to update the variables while the keys are held down
+void update_variables()
+{
+    if (keyA_held)
+        phi -= 0.1;
+    if (keyD_held)
+        phi += 0.1;
+    if (keyW_held)
+        theta += 0.1;
+    if (keyS_held)
+        theta -= 0.1;
 
-//	printf("%f %f %f %f %f\n", theta, phi, eyex, eyey, eyez);
-
+    eyex = (float)(r * sin(theta) * cos(phi));
+    eyey = (float)(r * sin(theta) * sin(phi));
+    eyez = (float)(r * cos(theta));
 }
 
 void error_callback(int error, const char* description)
@@ -422,6 +479,7 @@ int main(int argc, char **argv) {
 
 	while (!glfwWindowShouldClose(window)) {
 		display();
+		update_variables();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}

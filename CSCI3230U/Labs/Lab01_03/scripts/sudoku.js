@@ -1,33 +1,26 @@
 // add your code here
 
 function buildGameBoard(board) {
-    // get the table element to append the cells
     let table = document.getElementById("board");
 
-    // loop through the board array
     for (let i = 0; i < board.length; i++) {
-        // create a new row
         let row = document.createElement("tr");
         row.setAttribute("class", "mainBoard")
 
         for (let j = 0; j < board[i].length; j++) {
-            // create a new cell
             let cell = document.createElement("td");
             cell.innerHTML = board[i][j] > 0 ? board[i][j] : "";
             cell.classList.add("cell");
 
-            // give the cell a name
             cell.setAttribute("name", `cell${i + 1}${j + 1}`);
             cell.setAttribute("class", "mainBoard");
             cell.classList.add("cell");
-            // add the cell to the row
             row.appendChild(cell);
         }
 
         // add the row to the table
         table.appendChild(row);
     }
-    console.log(table);
 }
 function sameBlock(x1, y1, x2, y2) {
     let firstRow = Math.floor(y1 / 3) * 3;
