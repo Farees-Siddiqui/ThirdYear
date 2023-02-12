@@ -11,7 +11,7 @@
 #endif
 
 #define THREADS 8
-#define QUEUE_SIZE 30
+#define QUEUE_SIZE 10
 
 struct Queue {
     int head;

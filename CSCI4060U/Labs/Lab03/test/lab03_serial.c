@@ -90,13 +90,13 @@ void load_file_and_process_data() {
     char* files[2] = {"lat_test.csv", "long_test.csv"};
     for (int i = 0; i < 2; i++) {
         struct Queue q;
-        init_queue(&q);
         double val;
         FILE* fp = fopen(files[i], "r");
         printf("----------------Start of: %s----------------\n", files[i]);
         while (fscanf(fp, "%lf", &val) != EOF) {
             // crit section
-            enqueue(&q, val);
+            if (!is_full(&q)) 
+                enqueue(&q, val);
             if (is_full(&q)) {
                 while (q.size > 0) {
                     decimal_to_dms(dequeue(&q), omp_get_thread_num(), q.size);
