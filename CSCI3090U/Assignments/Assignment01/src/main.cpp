@@ -23,8 +23,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "Shaders.h"
 #include <stdio.h>
+#include <iostream>
 
 GLuint program;		// shader programs
+GLuint program2;
 GLuint triangleVAO; // the data to be displayed
 float angle = 0.0;
 double theta, phi; // user's position  on a sphere centered on the object
@@ -33,7 +35,7 @@ GLuint ibuffer;
 
 glm::mat4 projection;	// projection matrix
 float eyex, eyey, eyez; // eye position
-
+bool swtch = false;
 /*
  *  The init procedure creates the OpenGL data structures
  *  that contain the triangle geometry, compiles our
@@ -89,7 +91,15 @@ void init()
 	 */
 	vs = buildShader(GL_VERTEX_SHADER, (char *)"../src/example5.vs");
 	fs = buildShader(GL_FRAGMENT_SHADER, (char *)"../src/example5.fs");
+	
+	int fs2, vs2;
+
 	program = buildProgram(vs, fs, 0);
+
+
+	vs2 = buildShader(GL_VERTEX_SHADER, (char *)"../src/example2.vs");
+	fs2 = buildShader(GL_FRAGMENT_SHADER, (char *)"../src/example2.fs");
+	program2 = buildProgram(vs2, fs2, 0);
 
 	/*
 	 *  link the vertex coordinates to the vPosition
@@ -155,6 +165,50 @@ void display()
 
 	glBindVertexArray(triangleVAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, NULL);
+
+	GLuint newVAO;
+	glGenVertexArrays(1, &newVAO);
+	glBindVertexArray(newVAO);
+
+	GLfloat vertices2[3][3] = {	// coordinates of triangle vertices
+		{ 0.0,  800.0, 0.0 },
+		{ 400.0,800.0, 0.0},
+		{  800.0, 800.0, 0.0}
+	};
+
+	GLushort indexes2[3] = { 0, 1, 2 };
+
+
+	GLuint vbuffer2, ibuffer2;
+	GLint vPosition2;
+
+	/*
+	 *  load the vertex coordinate data
+	 */
+	glGenBuffers(1, &vbuffer2);
+	glBindBuffer(GL_ARRAY_BUFFER, vbuffer2);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), NULL, GL_STATIC_DRAW);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices2), vertices2);
+	
+	/*
+	 *  load the vertex indexes
+	 */
+	glGenBuffers(1, &ibuffer2);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibuffer2);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes2), indexes2, GL_STATIC_DRAW);
+
+	/*
+	 *  link the vertex coordinates to the vPosition
+	 *  variable in the vertex program
+	 */
+	glUseProgram(program2);
+	vPosition2 = glGetAttribLocation(program2,"vPosition");
+	glVertexAttribPointer(vPosition2, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(vPosition2);
+
+	glBindVertexArray(newVAO);
+	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, NULL);
+
 }
 
 /*
@@ -164,11 +218,11 @@ void display()
 
 static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
-	// if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-	// 	glfwSetWindowShouldClose(window, GLFW_TRUE);
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
 
-	// if (key == GLFW_KEY_A && action == GLFW_PRESS)
-	// 	phi -= 0.1;
+	if (key == GLFW_KEY_A && action == GLFW_PRESS)
+		swtch = !swtch;
 	// if (key == GLFW_KEY_D && action == GLFW_PRESS)
 	// 	phi += 0.1;
 	// if (key == GLFW_KEY_W && action == GLFW_PRESS)
@@ -186,9 +240,15 @@ void error_callback(int error, const char *description)
 	fprintf(stderr, "Error: %s\n", description);
 }
 
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+    std::cout << "Mouse position: (" << xpos << ", " << ypos << ")" << std::endl;
+}
+
 int main(int argc, char **argv)
 {
 	GLFWwindow *window;
+	std::cout << argv[0] << std::endl;
 
 	// start by setting error callback in case something goes wrong
 

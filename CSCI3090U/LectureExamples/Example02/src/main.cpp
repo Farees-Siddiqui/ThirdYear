@@ -46,9 +46,9 @@ void init() {
 	glBindVertexArray(triangleVAO);
 
 	GLfloat vertices[3][2] = {	// coordinates of triangle vertices
-		{ -0.5, -0.5 },
-		{  0.0,  0.5},
-		{  0.5, -0.5}
+		{ -1.0, -1.0 },
+		{ -0.5,  0.0},
+		{  0.0, -1.0}
 	};
 
 	GLushort indexes[3] = { 0, 1, 2 };	// indexes of triangle vertices
@@ -102,6 +102,48 @@ void display() {
 	glUniformMatrix4fv(modelLoc, 1, 0, glm::value_ptr(model));
 
 	glBindVertexArray(triangleVAO);
+	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, NULL);
+
+	GLuint newVAO;
+	glGenVertexArrays(1, &newVAO);
+	glBindVertexArray(newVAO);
+
+	GLfloat vertices2[3][2] = {	// coordinates of triangle vertices
+		{  0.0, -1.0 },
+		{  0.5,  0.0},
+		{  1.0, -1.0}
+	};
+
+	GLushort indexes2[3] = { 0, 1, 2 };
+
+
+	GLuint vbuffer2, ibuffer2;
+	GLint vPosition2;
+
+	/*
+	 *  load the vertex coordinate data
+	 */
+	glGenBuffers(1, &vbuffer2);
+	glBindBuffer(GL_ARRAY_BUFFER, vbuffer2);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), NULL, GL_STATIC_DRAW);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices2), vertices2);
+	
+	/*
+	 *  load the vertex indexes
+	 */
+	glGenBuffers(1, &ibuffer2);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibuffer2);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes2), indexes2, GL_STATIC_DRAW);
+	/*
+	 *  link the vertex coordinates to the vPosition
+	 *  variable in the vertex program
+	 */
+	glUseProgram(program);
+	vPosition2 = glGetAttribLocation(program,"vPosition");
+	glVertexAttribPointer(vPosition2, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(vPosition2);
+
+	glBindVertexArray(newVAO);
 	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, NULL);
 
 
@@ -177,7 +219,7 @@ int main(int argc, char **argv) {
 		display();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-		angle = angle + 0.2;
+		// angle = angle + 0.2;
 	}
 
 	glfwTerminate();

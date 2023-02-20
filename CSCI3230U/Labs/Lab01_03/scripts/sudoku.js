@@ -1,5 +1,3 @@
-// add your code here
-
 function buildGameBoard(board) {
     let table = document.getElementById("board");
 
@@ -18,7 +16,6 @@ function buildGameBoard(board) {
             row.appendChild(cell);
         }
 
-        // add the row to the table
         table.appendChild(row);
     }
 }
@@ -37,29 +34,25 @@ function sameColumn(x1, y1, x2, y2) {
 }
 
 let board = [
-    [5, 3, -1, -1, 7, -1, -1, -1, -1],
-    [6, -1, -1, 1, 9, 5, -1, -1, -1],
-    [-1, 9, 8, -1, -1, -1, -1, 6, -1],
-    [8, -1, -1, -1, 6, -1, -1, -1, 3],
-    [4, -1, -1, 8, -1, 3, -1, -1, 1],
-    [7, -1, -1, -1, 2, -1, -1, -1, 6],
-    [-1, 6, -1, -1, -1, -1, 2, 8, -1],
-    [-1, -1, -1, 4, 1, 9, -1, -1, 5],
-    [-1, -1, -1, -1, 8, -1, -1, 7, 9]
+    [-1, 1, -1, -1, -1, -1, -1, 9, -1],
+    [-1, -1, 4, -1, -1, -1, 2, -1, -1],
+    [-1, -1, 8, -1, -1, 5, -1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, 3, -1],
+    [2, -1, -1, -1, 4, -1, 1, -1, -1],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [-1, -1, 1, 8, -1, -1, 6, -1, -1],
+    [-1, 3, -1, -1, -1, -1, -1, 8, -1],
+    [-1, -1, 6, -1, -1, -1, -1, -1, -1]
 ]
 buildGameBoard(board);
 let moves = [];
 
-// keep track of the active digit
 let activeDigit;
 
-// get all cells in the game board
 const cells = document.querySelectorAll('.cell');
 
-// add click event listener to each cell in the game board
 cells.forEach((cell) => {
     cell.addEventListener('click', (event) => {
-        // if an active digit is set, place the digit in the cell
         if (activeDigit) {
             event.target.textContent = activeDigit;
             moves.push(event.target.textContent);
@@ -78,10 +71,25 @@ const numbers = document.querySelectorAll('.numbers');
 
 numbers.forEach((number) => {
     number.addEventListener('click', (event) => {
-        // set the active digit
         activeDigit = event.target.textContent;
         event.target.classList.add('user-input');
     });
+});
+
+const undoButton = document.getElementById("undo");
+undoButton.addEventListener("click", () => {
+    if (moves.length > 0) {
+        const lastMove = moves.pop();
+        const cells = document.querySelectorAll(".cell");
+        for (let i = cells.length - 1; i >= 0; i--) {
+            const cell = cells[i];
+            if (cell.textContent === lastMove) {
+                cell.textContent = "";
+                cell.classList.remove('error');
+                break; 
+            }
+        }
+    }
 });
 
 function highlightConflicts(cell) {

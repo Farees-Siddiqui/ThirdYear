@@ -18,7 +18,7 @@ td {
     background-color: #f76c5e;
 }
 
-td:hover{
+td.mainBoard:hover{
     background-color: #F5DD90;
 }
 
@@ -32,6 +32,42 @@ tr.mainBoard:nth-of-type(3n) td {
 
 table.mainBoard {
     border: 3px solid rgb(0, 0, 0) !important;
+}
+
+table.scores {
+    border-collapse: collapse;
+    border: none;    
+}
+
+tr.scores {
+    border: none;
+}
+
+td.scores{
+    border: none;
+    padding: 0 15px;
+}
+table.scores {
+    /* move the border down a little bit and center it on the page */
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th.scores {
+    /* make the header text bold and center it relative to the table */
+    font-weight: bold;
+    text-align: center;
+}
+
+th.c1 {
+    padding-left: 4vh;
+}
+
+/* add a bottom border for the thead */
+thead.scores {
+    border-bottom: 1px solid #000;
+    width: auto;
 }
 
 #title {
