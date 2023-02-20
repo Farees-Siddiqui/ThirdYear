@@ -17,7 +17,7 @@
 // version 0.9.0: Initial
 //
 
-#define __STDC_WANT_LIB_EXT1__ 1
+
 #include <cstdlib>
 #include <cstring>
 #include <cassert>

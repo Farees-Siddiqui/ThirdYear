@@ -21,7 +21,11 @@ char *readShaderFile(char *filename) {
 	int len;
 	int n;
 
-	fid = fopen(filename,"r");
+// #ifdef WIN32
+	// fopen(&fid, filename,"r");
+// #else
+	fid = fopen(filename, "r");
+// #endif
 	if(fid == NULL) {
 		printf("can't open shader file: %s\n", filename);
 		return(0);

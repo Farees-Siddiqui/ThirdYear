@@ -4,7 +4,7 @@ compile:
 	g++ -I../include -c ../src/*.cpp ../src/*.cc
 
 link: 
-	g++ *.o -o Assignment1 -L../lib -lglfw3dll -lopengl32 -lgdi32 -lglew32 -lglu32 -lm
+	g++ *.o -o Assignment01 -L../lib -lglfw3dll -lopengl32 -lgdi32 -lglew32 -lglu32 -lm
 
 clean: 
 	rm *.exe

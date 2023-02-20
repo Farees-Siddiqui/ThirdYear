@@ -5,6 +5,7 @@
 //
 #ifndef _TINY_OBJ_LOADER_H
 #define _TINY_OBJ_LOADER_H
+
 #include <string>
 #include <vector>
 #include <map>
