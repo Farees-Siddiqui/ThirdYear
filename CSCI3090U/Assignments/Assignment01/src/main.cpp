@@ -29,7 +29,6 @@
     #define M_PI 3.14159265358979323846
 #endif
 
-// glm::vec3 camera_position = glm::vec3(4.0f, 0.0f, -0.5f);
 glm::vec3 camera_position = glm::vec3(-0.1f, -5.0f, -0.5f);
 
 glm::vec3 camera_up = glm::vec3(0.0f, 0.0f, 1.0f);
