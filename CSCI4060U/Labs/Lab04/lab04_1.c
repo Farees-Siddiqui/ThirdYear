@@ -1,16 +1,16 @@
 #include <stdio.h>
+#include <math.h>
 
-int fibonacci(int n) {
+int fib(int n) {
     if (n <= 1) {
         return n;
+    } else {
+        return fib(n-1) + fib(n-2);
     }
-    return fibonacci(n-1) + fibonacci(n-2);
 }
 
 int main() {
-    int n = 10; // generate the first 10 Fibonacci numbers
-    for (int i = 0; i < n; i++) {
-        printf("%d ", fibonacci(i));
-    }
+    printf("%d ", fib(30));
+
     return 0;
 }

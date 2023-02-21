@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <math.h>
 #ifdef _OPENMP
     #include <omp.h>
 #else
@@ -7,34 +7,30 @@
     #define omp_get_num_threads() 1
 #endif
 
-int fibonacci(int n) {
+int fib(int n) {
     if (n <= 1) {
         return n;
-    }
+    } 
+    if (n < 20) // Called as child tasks can be thought of as a cutoff point
+        return fib(n-1)+fib(n-2); 
     int x, y;
     #pragma omp task shared(x)
-    x = fibonacci(n-1);
+    x = fib(n-1);
     #pragma omp task shared(y)
-    y = fibonacci(n-2);
+    y = fib(n-2);
     #pragma omp taskwait
     return x + y;
 }
 
 int main() {
-    int n = 10; 
+    omp_set_num_threads(4);
     #pragma omp parallel
     {
         #pragma omp single
         {
-            for (int i = 0; i < n; i++) {
-                #pragma omp task
-                {
-                    int fib = fibonacci(i);
-                    #pragma omp critical
-                    printf("%d ", fib);
-                }
-            }
+            printf("%d ", fib(30));
         }
     }
     return 0;
 }
+
