@@ -66,21 +66,34 @@ void init()
 
 	// GLushort indexes[3] = { 0, 1, 2 };	// indexes of triangle vertices
 
-	GLfloat vertices[4][3] = {
-		{ -1.0f, 0.0,-1.0f},
-		{  1.0f, 0.0,-1.0f},
-		{  1.0f, 0.0, 1.0f},
-		{ -1.0f, 0.0, 1.0f}
+	GLfloat vertices[8][4] = {
+		{-1.0, -1.0, -1.0, 1.0}, // 0
+		{-1.0, -1.0, 1.0, 1.0},	 // 1
+		{-1.0, 1.0, -1.0, 1.0},	 // 2
+		{-1.0, 1.0, 1.0, 1.0},	 // 3
+		{1.0, -1.0, -1.0, 1.0},	 // 4
+		{1.0, -1.0, 1.0, 1.0},	 // 5
+		{1.0, 1.0, -1.0, 1.0},	 // 6
+		{1.0, 1.0, 1.0, 1.0}	 // 7
 	};
 
-	GLfloat normals[4][3] = {
-		{0.0, 0.0, 1.0},
-		{0.0, 0.0, 1.0},
-		{0.0, 0.0, 1.0},
-		{0.0, 0.0, 1.0}
+	GLfloat normals[8][3] = {
+		{-1.0, -1.0, -1.0}, // 0
+		{-1.0, -1.0, 1.0},	// 1
+		{-1.0, 1.0, -1.0},	// 2
+		{-1.0, 1.0, 1.0},	// 3
+		{1.0, -1.0, -1.0},	// 4
+		{1.0, -1.0, 1.0},	// 5
+		{1.0, 1.0, -1.0},	// 6
+		{1.0, 1.0, 1.0}		// 7
 	};
 
-	GLushort indexes[6] = { 0, 1, 2, 0, 2, 3};	// indexes of triangle vertices
+	GLushort indexes[36] = {0, 1, 3, 0, 2, 3,
+							0, 4, 5, 0, 1, 5,
+							2, 6, 7, 2, 3, 7,
+							0, 4, 6, 0, 2, 6,
+							1, 5, 7, 1, 3, 7,
+							4, 5, 7, 4, 6, 7};
 
 	/*
 	 *  load the vertex coordinate data
@@ -111,7 +124,7 @@ void init()
 	 */
 	glUseProgram(program);
 	vPosition = glGetAttribLocation(program, "vPosition");
-	glVertexAttribPointer(vPosition, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(vPosition, 4, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(vPosition);
 	vNormal = glGetAttribLocation(program, "vNormal");
 	glVertexAttribPointer(vNormal, 3, GL_FLOAT, GL_FALSE, 0, (void *)sizeof(vertices));
@@ -144,30 +157,51 @@ void display()
 {
 	glm::mat4 model;
 	glm::mat4 view;
-	glm::mat4 modelViewPerspective;
+	glm::mat4 viewPerspective;
 	int modelLoc;
 	int normalLoc;
+	int viewLoc;
+	int colourLoc;
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glUseProgram(program);
-
-	model = glm::rotate(glm::mat4(1.0), angle, glm::vec3(0.0, 1.0, 0.0));
+	model = glm::mat4(1.0);
 
 	view = glm::lookAt(glm::vec3(eyex, eyey, eyez),
 					   glm::vec3(0.0f, 0.0f, 0.0f),
-					   glm::vec3(0.0f, 1.0f, 0.0f));
+					   glm::vec3(0.0f, 0.0f, 1.0f));
 
 	glm::mat3 normal = glm::transpose(glm::inverse(glm::mat3(view * model)));
 
-	modelViewPerspective = projection * view * model;
+	viewPerspective = projection * view;
 
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(program);
 	modelLoc = glGetUniformLocation(program, "model");
-	glUniformMatrix4fv(modelLoc, 1, 0, glm::value_ptr(modelViewPerspective));
+	viewLoc = glGetUniformLocation(program, "viewPerspective");
+	glUniformMatrix4fv(viewLoc, 1, 0, glm::value_ptr(viewPerspective));
 	normalLoc = glGetUniformLocation(program, "normalMat");
 	glUniformMatrix3fv(normalLoc, 1, 0, glm::value_ptr(normal));
+	colourLoc = glGetUniformLocation(program, "colour");
 
 	glBindVertexArray(triangleVAO);
+
+	glUniform4f(colourLoc, 1.0, 0.0, 0.0, 1.0);
+	glUniformMatrix4fv(modelLoc, 1, 0, glm::value_ptr(model));
+	glUniformMatrix3fv(normalLoc, 1, 0, glm::value_ptr(normal));
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, NULL);
+
+	model = glm::translate(model, glm::vec3(2.0, 2.0, 0.0));
+	normal = glm::transpose(glm::inverse(glm::mat3(view * model)));
+	glUniform4f(colourLoc, 0.0, 1.0, 0.0, 1.0);
+
+	glUniformMatrix4fv(modelLoc, 1, 0, glm::value_ptr(model));
+	glUniformMatrix3fv(normalLoc, 1, 0, glm::value_ptr(normal));
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, NULL);
+
+	model = glm::translate(model, glm::vec3(-4.0, 2.0, 0.0));
+	normal = glm::transpose(glm::inverse(glm::mat3(view * model)));
+	glUniform4f(colourLoc, 0.0, 0.0, 1.0, 1.0);
+	glUniformMatrix4fv(modelLoc, 1, 0, glm::value_ptr(model));
+	glUniformMatrix3fv(normalLoc, 1, 0, glm::value_ptr(normal));
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, NULL);
 }
 
@@ -175,24 +209,27 @@ void display()
  *  Called each time a key is pressed on
  *  the keyboard.
  */
-
 static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
-	// if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-	// 	glfwSetWindowShouldClose(window, GLFW_TRUE);
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
 
-	// if (key == GLFW_KEY_A && action == GLFW_PRESS)
-	// 	phi -= 0.1;
-	// if (key == GLFW_KEY_D && action == GLFW_PRESS)
-	// 	phi += 0.1;
-	// if (key == GLFW_KEY_W && action == GLFW_PRESS)
-	// 	theta += 0.1;
-	// if (key == GLFW_KEY_S && action == GLFW_PRESS)
-	// 	theta -= 0.1;
+	if (key == GLFW_KEY_A && action == GLFW_PRESS)
+		phi -= 0.1;
+	if (key == GLFW_KEY_D && action == GLFW_PRESS)
+		phi += 0.1;
+	if (key == GLFW_KEY_W && action == GLFW_PRESS)
+		theta += 0.1;
+	if (key == GLFW_KEY_S && action == GLFW_PRESS)
+		theta -= 0.1;
+	if (key == GLFW_KEY_P && action == GLFW_PRESS) 
+		projection = glm::perspective(45.0f, 1.0f, 1.0f, 100.0f);
+	if (key == GLFW_KEY_O && action == GLFW_PRESS)
+		projection = glm::ortho(-50.0f, 5.0f, -5.0f, 5.0f, 1.0f, 100.0f);
 
-	// eyex = (float)(r * sin(theta) * cos(phi));
-	// eyey = (float)(r * sin(theta) * sin(phi));
-	// eyez = (float)(r * cos(theta));
+	eyex = (float)(r * sin(theta) * cos(phi));
+	eyey = (float)(r * sin(theta) * sin(phi));
+	eyez = (float)(r * cos(theta));
 }
 
 void error_callback(int error, const char *description)
@@ -253,7 +290,7 @@ int main(int argc, char **argv)
 
 	eyex = 0.0;
 	eyez = 10.0;
-	eyey = 10.0;
+	eyey = 0.0;
 
 	theta = 1.5;
 	phi = 1.5;
