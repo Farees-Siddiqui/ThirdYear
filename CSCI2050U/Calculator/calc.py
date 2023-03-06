@@ -35,7 +35,6 @@ def binaryToDecimal(x) -> int:
     """
     return int(x)
 
-# implement a function that takes in a negative decimal number and returns the two's complement representation of that number in n bits
 def decimalToBinary(x, n, c) -> str:
     """
     Returns the two's complement representation of x in n bits.
@@ -47,4 +46,27 @@ def decimalToBinary(x, n, c) -> str:
         x = 2**n + x
     return get_bin(x, n, c)
 
-print(decimalToBinary(10, 5, 5))
+def binaryToHex(x) -> str:
+    """
+    Returns the hexadecimal representation of x.
+    x is the binary number to be converted
+    """
+    return hex(int(x))[2:]
+
+def hexToBinary(x) -> str:
+    """
+    Returns the binary representation of x.
+    x is the hexadecimal number to be converted
+    """
+    res = bin(int(x))[2:]
+    # format the res so it prints in 4-bit chunks
+    res = ' '.join(res[i:i+4] for i in range(0, len(res), 4))
+    return res
+
+def decimalToHex(x) -> str:
+    """
+    Returns the hexadecimal representation of x.
+    x is the number to be converted
+    """
+    return hex(x)
+
