@@ -1,79 +1,50 @@
-import math
+"""x is the binary number, n is the length of the binary number, c is the number of bits to be printed per chunk"""
+get_bin = lambda x, n, c: ' '.join(format(x, 'b').zfill(n)[i:i+c] for i in range(0, n, c))
 
-# write a function that takes in a string representing a boolean operation. for example A and B or A or B
-# the function should print the truth table for the operation
+def arithmeticShiftRight(x, n) -> str:
+    """
+    Performs an arithmetic shift right on the binary representation of x by n bits. Prints the result in c-bit chunks.
+    x is the number to be shifted
+    n is the number of times to shift
+    """
+    for i in range(int(n)):
+        x = x >> 1
+    return get_bin(x, 11, 5)
 
-def eval_operation(operations, values):
-    # create a list of the operations
-    operations_list = []
-    for op in operations:
-        if op == "and" or op == "or" or op == "not" or op == "xor":
-            operations_list.append(op)
-        else:
-            operations_list.append(values[op])
-    # evaluate the operations
-    while len(operations_list) > 1:
-        # evaluate not
-        for i in range(len(operations_list)):
-            if operations_list[i] == "not":
-                operations_list[i] = not operations_list[i+1]
-                del operations_list[i+1]
-                break
-        # evaluate xor
-        for i in range(len(operations_list)):
-            if operations_list[i] == "xor":
-                operations_list[i] = operations_list[i-1] ^ operations_list[i+1]
-                del operations_list[i-1]
-                del operations_list[i]
-                break
-        # evaluate and
-        for i in range(len(operations_list)):
-            if operations_list[i] == "and":
-                operations_list[i] = operations_list[i-1] and operations_list[i+1]
-                del operations_list[i-1]
-                del operations_list[i]
-                break
-        # evaluate or
-        for i in range(len(operations_list)):
-            if operations_list[i] == "or":
-                operations_list[i] = operations_list[i-1] or operations_list[i+1]
-                del operations_list[i-1]
-                del operations_list[i]
-                break
-    return operations_list[0]
+def arithmeticShiftLeft(x, n) -> str:
+    """
+    Performs an arithmetic shift left on the binary representation of x by n bits. Prints the result in c-bit chunks.
+    x is the number to be shifted
+    n is the number of times to shift
+    """
+    for i in range(int(n)):
+        x = x << 1
+    return get_bin(x, 11, 5)
 
-def gen_truth_table(operation):
-    # split the operation into a list of the individual operations
-    operations = operation.split(" ")
-    # create a list of the variables
-    variables = []
-    for op in operations:
-        if op != "and" and op != "or" and op != "not" and op != "xor":
-            variables.append(op)
-    # remove duplicates
-    variables = list(set(variables))
-    # sort the variables
-    variables.sort()
-    # create a list of all possible combinations of the variables
-    combinations = []
-    for i in range(2**len(variables)):
-        combinations.append([])
-        for j in range(len(variables)):
-            combinations[i].append((i // 2**j) % 2)
-    # create a dictionary of the variables and their values
-    values = {}
-    for i in range(len(variables)):
-        values[variables[i]] = combinations[0][i]
-    # create a list of the values of the operations
-    operation_values = []
-    for combination in combinations:
-        for i in range(len(variables)):
-            values[variables[i]] = combination[i]
-        operation_values.append(eval_operation(operations, values))
-    # print the truth table
-    print("Truth Table for " + operation)
-    print(" ".join(variables) + " " + operation)
-    for i in range(len(combinations)):
-        print(" ".join([str(x) for x in combinations[i]]) + " " + str(operation_values[i]))
-        
-gen_truth_table("A and not B or A and not C or B and C")
+def decimalToHex(x) -> str:
+    """
+    Returns the hexadecimal representation of x.
+    x is the number to be converted
+    """
+    return hex(x)
+
+def binaryToDecimal(x) -> int:
+    """
+    Returns the decimal representation of x.
+    x is the binary number to be converted
+    """
+    return int(x)
+
+# implement a function that takes in a negative decimal number and returns the two's complement representation of that number in n bits
+def decimalToBinary(x, n, c) -> str:
+    """
+    Returns the two's complement representation of x in n bits.
+    x is the number to be converted
+    n is the number of bits to be used
+    c is the number of bits to be printed per chunk
+    """
+    if x < 0:
+        x = 2**n + x
+    return get_bin(x, n, c)
+
+print(decimalToBinary(10, 5, 5))
