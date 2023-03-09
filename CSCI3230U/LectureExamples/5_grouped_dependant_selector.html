@@ -1,0 +1,32 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grouped dependant selector</title>
+    <style>
+        div p, div h1 {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Grouped descendant Selector</h2>
+
+    <div>
+        <p>Paragraph 1 in the div.</p>
+        <p>Paragraph 2 in the div.</p>
+        <section>
+            <p>Paragraph 3 in the div.</p>
+        </section>
+        <div>
+            <h1>In a div, but not in a paragraph</h1>
+        </div>
+    </div>
+
+    <p>Paragraph 4. Not in a div.</p>
+    <h1>H1, but not in a div</h1>
+</body>
+
+</html>

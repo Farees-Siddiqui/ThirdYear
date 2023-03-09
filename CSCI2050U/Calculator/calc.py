@@ -70,3 +70,4 @@ def decimalToHex(x) -> str:
     """
     return hex(x)
 
+print("Arithmetic Shift Right: " + arithmeticShiftRight(0b11101110001, 1))

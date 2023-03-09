@@ -1,0 +1,33 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dependant selector</title>
+    <style>
+        div p {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Descendant Selector</h2>
+
+    <p>The descendant selector matches all elements that are descendants of a specified element.</p>
+
+    <div>
+        <p>Child: Paragraph 1 in the div.</p>
+        <p>Child: Paragraph 2 in the div.</p>
+        <section>
+            <p>Descendant: Paragraph 3 in the div.</p>
+        </section>
+        <div>
+            <h1>In a div, but not in a paragraph</h1>
+        </div>
+    </div>
+
+    <p>Paragraph 4. Not in a div.</p>
+</body>
+
+</html>

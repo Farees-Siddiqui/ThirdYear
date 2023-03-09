@@ -1,0 +1,30 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child selector</title>
+    <style>
+        div > p {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Child Selector</h2>
+    
+    <p>Selects all elements that are the children of a specified element.</p>
+
+    <div>
+        <p>Paragraph 1 in the div.</p>
+        <section>
+            <p>Paragraph 2 is not a Child, but a Descendant.</p>
+        </section>
+        <p>Paragraph 3 in the div.</p>
+    </div>
+
+    <p>Paragraph 4. Not in a div.</p>
+</body>
+
+</html>
