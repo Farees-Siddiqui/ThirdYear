@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>XML parser</title>
+</head>
+
+<body>
+    <h1>Open the JS console...</h1>
+
+    <script>
+        // Define our XML document
+        const rawXML = '\
+        <inventory>\
+        <computers>\
+            <laptop price="499.99" cpu="i5-3570" />\
+            <laptop price="549.99" cpu="i5-3570" />\
+            <laptop price="999.99" cpu="i7-2600" />\
+        </computers>\
+        </inventory>';
+
+        // Instantiate our DOMParser object
+        const parser = new DOMParser();
+
+        // Parse in vanilla JavaScript
+        const xmlDoc_js = parser.parseFromString(rawXML, "text/xml");
+        // Parse with jQuery
+        const xmlDoc_jq = $.parseXML(rawXML);
+
+        // Check our var types
+        console.log('is XMLDocument? ', xmlDoc_js instanceof XMLDocument);
+        console.log('is HTMLDocument? ', xmlDoc_js instanceof HTMLDocument);
+
+    </script>
+</body>
+
+</html>

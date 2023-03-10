@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch with XML</title>
+</head>
+
+<body>
+    <script>
+        fetch('data/test_data.xml')
+            .then((resp) => resp.text())
+            .then(function (rawXML) { // success
+                // success
+                d = rawXML;
+                xmlData = (new DOMParser()).parseFromString(rawXML, "text/xml");
+                console.log('XMLDocument: ', xmlData instanceof XMLDocument);
+                person = xmlData.getElementsByTagName('person')[0];
+                firstNameVal = person.getAttribute('firstName');
+                firstName = document.getElementById('xmlFirstName');
+            })
+            .catch(function (error) { // error
+                console.log(error);
+            });
+    </script>
+</body>
+
+</html>

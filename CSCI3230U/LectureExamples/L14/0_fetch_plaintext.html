@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch with plaintext</title>
+</head>
+
+<body>
+    <script>
+        fetch('data/test_data.txt')
+            .then((response) => response.text())
+            .then(function (data) {
+                // Success
+                d = data;
+                console.log(data);
+            })
+            .catch(function (error) {
+                // error
+                console.log(error);
+            });
+
+
+        // Equivalent with arrow/anonymous function switched
+        // fetch('data/test_data.txt')
+        //     .then(function (resposne) {
+        //         return response.text()
+        //     })
+        //     .then((data) => {
+        //         d = data;
+        //         console.log(data);
+        //     });
+    </script>
+</body>
+
+</html>

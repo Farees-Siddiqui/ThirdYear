@@ -1,0 +1,21 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    height: 4vh;
+    width: 60vh;
+    text-align: center;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.selected {
+    background-color: #e0e0ff;
+}
+
+th {
+    background-color: #d0d0d0;
+
+}
