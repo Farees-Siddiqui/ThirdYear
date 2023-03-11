@@ -3,7 +3,7 @@
 // We include stdlib.h so we can define exit() and exit codes
 #include <stdlib.h>
 // We include pthreads.h so we can use the pthreads api for thread creation and management
-#include <pthreads.h>
+#include <pthread.h>
 
 // define the number of threads we want to create
 #define THREADS 100000
@@ -16,7 +16,7 @@ void *do_nothing(void *args) {
 
 int main() {
     // here we declare the number of threads we want to create
-    pthread_t threads[THREADS]
+    pthread_t threads[THREADS];
     long i;
     int error;
     
@@ -37,7 +37,7 @@ int main() {
         error = pthread_join(threads[i], NULL);
         // Log if there was an error in the thread join and exit with a code of -1
         if (error) {
-            printf("ERROR: pthread_join()\n", error);
+            printf("ERROR: pthread_join()\n");
             exit(-1);
         }
     }
