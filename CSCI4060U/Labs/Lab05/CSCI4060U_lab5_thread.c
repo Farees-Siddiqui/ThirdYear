@@ -8,6 +8,12 @@
 // define the number of threads we want to create
 #define THREADS 100000
 
+/*
+    Timing: CPU Time => 0.285s + 30.776s = 31.061s
+            Real Time => 27.754s
+ */
+
+
 // This function does nothing, just used to test the program.
 void *do_nothing(void *args) {
     int i;

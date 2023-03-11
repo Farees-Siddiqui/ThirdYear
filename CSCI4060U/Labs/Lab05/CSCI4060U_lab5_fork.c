@@ -8,11 +8,15 @@
 #include <stdlib.h>
 // we are including unistd.h for the posix api. lets us ues functions such as fork() and waitpid()
 #include <unistd.h>
-
 // we are including sys/types.h so we can use the pid_t type
 #include <sys/types.h>
 
 #define NFORKS 100000
+
+/*
+  Timing: CPU Time => 1.801s + 13.095s = 14.896s
+          Real Time => 15.625s
+*/
 
 // This function does nothing. It is used to waste time in the child process to test the fork() function. It initializes an integer to 0 and then does nothing.
 void do_nothing() {
