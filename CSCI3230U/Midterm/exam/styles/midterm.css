@@ -1,0 +1,19 @@
+/* if you need any vanilla CSS, add it here (optional) */
+/* body {
+    padding-top: 2vh;
+    align-self: center;
+} */
+
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}

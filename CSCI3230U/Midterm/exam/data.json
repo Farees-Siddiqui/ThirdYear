@@ -1,0 +1,30 @@
+[
+    {
+        "id": "1",
+        "title": "Tales of Success",
+        "author": "Brenda Taglia", 
+        "price": 14.99,
+        "rating": 4
+    },
+    {
+        "id": "2",
+        "title": "Home Finance Basics", 
+        "author": "Barton Mensah", 
+        "price": 9.99,
+        "rating": 5
+    },
+    {
+        "id": "3",
+        "title": "Adventures in Cycling", 
+        "author": "Miguel Ángel López", 
+        "price": 9.99,
+        "rating": 4
+    },
+    {
+        "id": "3",
+        "title": "Adventures in Cycling", 
+        "author": "Miguel Ángel López", 
+        "price": 9.99,
+        "rating": 5
+    }
+]

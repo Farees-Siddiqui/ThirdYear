@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reviews</title>
+
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="styles/midterm.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="scripts/midterm.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- add your add new rating form here -->
+        <div class="field">
+            <div class="field">
+                <label class="label">ID: <input class="input is-primary" type="text" placeholder="Primary input" id="id" style="width: 20%"></label>
+            </div>
+            <div class="field">
+                <label class="label">Title: <input class="input is-primary" type="text" placeholder="Primary input" id="id" style="width: 20%"></label>
+            </div>
+            <div class="field">
+                <label class="label">Author: <input class="input is-primary" type="text" placeholder="Primary input" id="id" style="width: 20%"></label>
+            </div>
+            <div class="field">
+                <label class="label">Price: <input class="input is-primary" type="text" placeholder="Primary input" id="id" style="width: 20%"></label>
+            </div>
+            <label class="label">Rating:  </label>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <button class="button is-link" type="submit">Submit</button>
+            </div>
+        </div>
+
+
+        <div id="rating_chart"></div>
+        <div id="rating_table">
+
+        </div>
+    </div>
+</body>
+
+</html>
