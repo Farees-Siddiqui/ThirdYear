@@ -1,57 +1,42 @@
-// We include stdio.h for input/output functions such as printf()
-#include <stdio.h>
-// We include stdlib.h so we can define exit() and exit codes
-#include <stdlib.h>
-// We include pthreads.h so we can use the pthreads api for thread creation and management
-#include <pthread.h>
+#include <stdio.h> // Included for input/output functions such as printf
+#include <stdlib.h> // Included for the exit() function
+#include <pthread.h> // included for the posix threading api
 
-// define the number of threads we want to create
 #define THREADS 100000
 
 /*
-    Timing: CPU Time => 0.285s + 30.776s = 31.061s
-            Real Time => 27.754s
- */
+  Timing: CPU Time => 0.191s + 3.277s = 3.468s
+          Real Time => 6.869s
+*/
 
-
-// This function does nothing, just used to test the program.
-void *do_nothing(void *args) {
-    int i;
-    i = 0;
-}
+// do nothing function, does nothing just for testing
+void *do_nothing(void *);
 
 int main() {
-    // here we declare the number of threads we want to create
-    pthread_t threads[THREADS];
-    long i;
-    int error;
-    
-    // Use a for loop to create THREADS number of threads
-    for (i = 0; i < THREADS; i++) {
-        // create the thread and check the return value for errors
-        error = pthread_create(&threads[i], NULL, do_nothing, NULL);
-        // Log if there was an error in the thread creation and exit with a code of -1
-        if (error) {
-            printf("ERROR: pthread_create()\n");
+    // create a thread
+    pthread_t thread;
+    // status of the thread
+    void *status;
+
+    // create THREADS threads and join them using a for loop
+    for (int i = 0; i < THREADS; i++) {
+        // create the thread and check the error code, if there is an error print an error message and exit
+        if (pthread_create(&thread, NULL, do_nothing, NULL) != 0) {
+            printf("Error creating thread\n");
+            exit(-1);
+        }
+        // join the thread and check the error code, if there is an error print an error message and exit
+        if (pthread_join(thread, &status) != 0) {
+            printf("Error joining thread\n");
             exit(-1);
         }
     }
 
-    // Use a for loop to join the threads
-    for (i = 0; i < THREADS; i++) {
-        // join the thread and check the return value for errors
-        error = pthread_join(threads[i], NULL);
-        // Log if there was an error in the thread join and exit with a code of -1
-        if (error) {
-            printf("ERROR: pthread_join()\n");
-            exit(-1);
-        }
-    }
-
-    printf("Threads completed, and joined successfully.\n");
-    // exit the main thread
+    printf("All threads complete\n");
     pthread_exit(NULL);
+}
 
-
-    return 0;
+void *do_nothing(void *arg) {
+    int i;
+    i = 0;
 }
