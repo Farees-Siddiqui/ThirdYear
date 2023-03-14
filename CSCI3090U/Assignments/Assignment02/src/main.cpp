@@ -41,7 +41,7 @@ glm::mat4 projection;	// projection matrix
 float eyex, eyey, eyez;	// eye position
 
 bool cSwitch = true;
-
+bool lSwitch = true;
 
 /*
  * Set up a C struct that is indentical to the
@@ -55,12 +55,13 @@ struct Light {
 	GLfloat spotDirection[4];
 	GLfloat spotCutoff;
 	GLfloat spotExp;
-	GLfloat padding[2];	// pad structure to a multiple of 16 bytes
+	bool spotlight;
+	GLboolean padding[7];	// pad structure to a multiple of 16 bytes
 } light = {
 	{ 500.0, 500.0, 800.0, 1.0},
 	{ 1.0, 1.0, 1.0, 1.0},
 	{ 500.0, 500.0, 750.0, 1.0},
-	0.85, 200.0, 0.0, 0.0
+	0.85, 200.0, true, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 };
 
 GLuint lightBuffer;
@@ -71,7 +72,7 @@ struct Material {
 	GLfloat padding[3];	// pad structure to a multiple of 16 bytes
 } material = {
 	{1.0, 0.0, 0.0, 1.0},
-	255.0, 0.0, 0.0, 0.0
+	100.0, 0.0, 0.0, 0.0
 };
 GLuint materialBuffer;
 
@@ -284,6 +285,10 @@ void display() {
  */
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+	eyex = (float)(r*sin(theta)*cos(phi));
+	eyey = (float)(r*sin(theta)*sin(phi));
+	eyez = (float)(r*cos(theta));
+
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 
@@ -299,19 +304,21 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 	if (key == GLFW_KEY_C && action == GLFW_PRESS) {
 		cSwitch = !cSwitch;
 		if (!cSwitch) {
-			material.Mcolour[0] = 0.0;
-			material.Mcolour[1] = 1.0;
-			glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(material), &material.Mcolour);
+			material.Mcolour[0] = 1.0;
+			material.Mcolour[1] = 0.64;
+			glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(material), &material);
 		} else {
 			material.Mcolour[0] = 1.0;
 			material.Mcolour[1] = 0.0;
-			glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(material), &material.Mcolour);
+			glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(material), &material);
 		}
 	}
 
-	eyex = (float)(r*sin(theta)*cos(phi));
-	eyey = (float)(r*sin(theta)*sin(phi));
-	eyez = (float)(r*cos(theta));
+	if (key == GLFW_KEY_L && action == GLFW_PRESS) {
+		light.spotlight = !light.spotlight;
+		glBindBuffer(GL_UNIFORM_BUFFER, lightBuffer);
+		glBufferSubData(GL_UNIFORM_BUFFER, offsetof(Light, spotlight), sizeof(GLboolean), &light.spotlight);
+	}
 
 }
 
@@ -393,7 +400,6 @@ int main(int argc, char **argv) {
 		display();
 		glfwSwapBuffers(window);
 		glfwPollEvents();		
-
 	}
 
 	glfwTerminate();
