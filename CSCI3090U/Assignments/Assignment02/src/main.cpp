@@ -195,7 +195,7 @@ void init() {
 
 	glGenBuffers(1, &materialBuffer);
 	glBindBuffer(GL_UNIFORM_BUFFER, materialBuffer);
-	glBufferData(GL_UNIFORM_BUFFER, sizeof(light), &material, GL_STATIC_DRAW);
+	glBufferData(GL_UNIFORM_BUFFER, sizeof(material), &material, GL_STATIC_DRAW);
 
 	/*
 	 *  compile and build the shader program

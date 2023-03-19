@@ -47,7 +47,7 @@ void main() {
 		atten = 1.0;
 		L = vec3(1.0, 1.0, 0.0);
 		L = normalize(L);
-		H = normalize(L + vec3(0.0, 0.0, 0.5));
+		H = normalize(L + vec3(0.0, 0.0, 1.0));
 	}
 	diffuse = dot(N,L) * atten;
 	if(diffuse < 0.0) {
