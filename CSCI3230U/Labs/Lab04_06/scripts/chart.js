@@ -11,6 +11,7 @@ function getGrade(mark) {
         return 'A';
     }
 }
+
 let colVals = [];
 let rowVals = [];
 let charVals = [];
@@ -24,40 +25,6 @@ const svg = d3.select("#chart")
     .attr("height", 400)
     .append("g")
     .attr("transform", "translate(50, 30)");
-
-    
-
-$("th.col_th").each(function (index) {
-    $(this).click(function () {
-        colVals = [];
-        charVals = [];
-        var column = $("tr td:nth-child(" + (index + 2) + ")");
-        console.log("clicked column " + index);
-
-        column.each(function () {
-            colVals.push(parseFloat($(this).text()));
-        });
-        charVals = getFrequencies(colVals);
-        console.log(charVals);
-        generateBarChart();
-    });
-});
-
-// each time a row is selected, append each value in the row to an array
-$("th.row_th").each(function (index) {
-    $(this).click(function () {
-        rowVals = [];
-        charVals = [];
-        var row = $("tr").eq(index + 1);
-        console.log("clicked row " + index);
-
-        row.find("td").each(function () {
-            rowVals.push(parseFloat($(this).text()));
-        });
-        charVals = getFrequencies(rowVals);
-        console.log(charVals);
-    });
-});
 
 function getFrequencies(marks) {
     let freq = {
@@ -93,18 +60,18 @@ function generateBarChart() {
 
     const colorScale = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.value)])
-        .range([height, 0]);
+        .range(['white', 'blue']);
 
     // Update the bars with new data
     const bars = svg.selectAll("rect")
         .data(data);
 
-    bars.exit().remove(); 
+    bars.exit().remove();
 
-    bars.enter().append("rect") 
+    bars.enter().append("rect")
         // make the intensity of the color depend on the value without using interpolateBlues
-        .attr("fill", "steelblue")
-        .merge(bars) 
+        .attr("fill", d => colorScale(d.value))
+        .merge(bars)
         .transition()
         .duration(500)
         .attr("x", d => xScale(d.label))
@@ -142,3 +109,4 @@ function generateBarChart() {
         .attr("text-anchor", "middle")
         .text("Y Axis Label");
 }
+

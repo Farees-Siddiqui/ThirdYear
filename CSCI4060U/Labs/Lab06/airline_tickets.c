@@ -2,6 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+Agents  | Seats  | Overselling  | Time
+5       | 100    | 10%          | 3.1ms
+5       | 2500   | 25%          | 4.0ms
+50      | 2500   | 25%          | 4.5ms
+*/
+
+
 struct thread_data
 {
     int thread_id;

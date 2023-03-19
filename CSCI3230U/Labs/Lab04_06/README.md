@@ -1,0 +1,1 @@
+I thought I should I should add that the grades.csv values were inconsistent, I decided to scale them up to be /100 since this is what made the most sense and had the most resemblance to the previous examples.
