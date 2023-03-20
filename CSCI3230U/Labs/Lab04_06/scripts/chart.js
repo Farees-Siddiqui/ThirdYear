@@ -16,13 +16,13 @@ let colVals = [];
 let rowVals = [];
 let charVals = [];
 
-const margin = { top: 20, right: 20, bottom: 30, left: 50 };
+const margin = { top: 20, right: 20, bottom: 30, left: 15 };
 const width = 400 - margin.left - margin.right;
 const height = 400 - margin.top - margin.bottom;
 
 const svg = d3.select("#chart")
-    .attr("width", 400)
-    .attr("height", 400)
+    .attr("width", 600)
+    .attr("height", 600)
     .append("g")
     .attr("transform", "translate(50, 30)");
 
@@ -79,31 +79,30 @@ function generateBarChart() {
         .attr("width", xScale.bandwidth())
         .attr("height", d => height - yScale(d.value));
 
-    // Update the x-axis with new labels
-    const xAxis = d3.axisBottom(xScale);
-    svg.select(".x-axis")
-        .transition()
-        .duration(500)
-        .call(xAxis);
-
+    // Add the x-axis
     svg.append("g")
         .attr("class", "x-axis")
         .attr("transform", `translate(0, ${height})`)
-        .call(xAxis)
-        .append("text")
+        .call(d3.axisBottom(xScale));
+
+    // Add the x-axis label
+    svg.append("text")
         .attr("class", "axis-label")
         .attr("x", width / 2)
-        .attr("y", margin.bottom / 2)
+        .attr("y", height + margin.bottom / 2)
         .attr("text-anchor", "middle")
+        .attr("transform", "translate(0, 20)")
         .text("X Axis Label");
 
-    // Label the y-axis
+    // Add the y-axis
     svg.append("g")
         .attr("class", "y-axis")
-        .call(d3.axisLeft(yScale))
-        .append("text")
+        .call(d3.axisLeft(yScale));
+
+    // Add the y-axis label
+    svg.append("text")
         .attr("class", "axis-label")
-        .attr("transform", "rotate(-90)")
+        .attr("transform", "translate(-20, 0) rotate(-90)")
         .attr("x", -height / 2)
         .attr("y", -margin.left)
         .attr("text-anchor", "middle")

@@ -91,12 +91,14 @@ fetch('http://localhost:5500/grades.csv')
             input.keypress(function (event) {
                 if (event.which == 13) {
                     cell.text(input.val());
+                    generateBarChart();
                 }
                 cell.removeClass("selected")
             });
 
             input.blur(function () {
                 cell.text(input.val());
+                generateBarChart();
                 cell.removeClass("selected")
             });
         });
