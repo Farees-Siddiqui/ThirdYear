@@ -1,0 +1,146 @@
+[
+    {
+        "id": "be2ed43c-9eae-48e2-8744-4c70b06f73ef",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "check linear model architecture",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "=================================================================\n                     Kernel Shape Output Shape Params Mult-Adds\nLayer                                                          \n0_model.Flatten_0               -    [32, 784]      -         -\n1_model.LazyLinear_1    [784, 10]     [32, 10]  7.85k     7.84k\n-----------------------------------------------------------------\n                      Totals\nTotal params           7.85k\nTrainable params       7.85k\nNon-trainable params     0.0\nMult-Adds              7.84k\n=================================================================",
+        "type": "stdout"
+    },
+    {
+        "id": "72d6c3f8-21b8-48e1-9b04-bf08aff3143b",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "check trainer construction",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "True",
+        "type": "stdout"
+    },
+    {
+        "id": "10e1c3ba-49f9-410e-8a31-2c6e768afefa",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "check trainer methods",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "trainer.train_one_epoch? True\ntrainer.val_one_epoch? True\ntrainer.train? True\ntrainer.reset? True",
+        "type": "stdout"
+    },
+    {
+        "id": "86fd0345-b238-4623-8ba1-8c75a49ff728",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "check trainer.train_one_epoch",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "loss is numeric True\nacc is numeric True",
+        "type": "stdout"
+    },
+    {
+        "id": "f99ddfe6-a941-4993-abea-be447e86371e",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "check trainer.val_one_epoch",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "loss is numeric True\nacc is numeric True",
+        "type": "stdout"
+    },
+    {
+        "id": "bcb64e8c-385d-41bd-a663-fcb36633f9c2",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "check trainer.reset",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "Ok",
+        "type": "stdout"
+    },
+    {
+        "id": "fc77595c-5c58-4b14-9fad-0175c9b3ee73",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "MLP model architecture",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "==================================================================\n                     Kernel Shape Output Shape  Params Mult-Adds\nLayer                                                           \n0_model.Flatten_0               -    [32, 784]       -         -\n1_model.LazyLinear_1    [784, 50]     [32, 50]  39.25k     39.2k\n2_model.ReLU_2                  -     [32, 50]       -         -\n3_model.LazyLinear_3     [50, 10]     [32, 10]   510.0     500.0\n------------------------------------------------------------------\n                      Totals\nTotal params          39.76k\nTrainable params      39.76k\nNon-trainable params     0.0\nMult-Adds              39.7k\n==================================================================",
+        "type": "stdout"
+    },
+    {
+        "id": "2b610065-ed37-434c-96f0-dec8ee3a0e4c",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "CNN Linear architecture",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "======================================================================\n                      Kernel Shape     Output Shape Params Mult-Adds\nLayer                                                               \n0_model.Conv2d_0      [1, 5, 3, 3]  [32, 5, 28, 28]   50.0    35.28k\n1_model.MaxPool2d_1              -  [32, 5, 14, 14]      -         -\n2_model.ReLU_2                   -  [32, 5, 14, 14]      -         -\n3_model.Flatten_3                -        [32, 980]      -         -\n4_model.LazyLinear_4     [980, 10]         [32, 10]  9.81k      9.8k\n----------------------------------------------------------------------\n                      Totals\nTotal params           9.86k\nTrainable params       9.86k\nNon-trainable params     0.0\nMult-Adds             45.08k\n======================================================================",
+        "type": "stdout"
+    },
+    {
+        "id": "f81dd3f3-7bc9-45df-b8a7-63fb01dbc1bd",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "deep cnn architecture",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "==========================================================================\n                        Kernel Shape      Output Shape  Params Mult-Adds\nLayer                                                                   \n0_model.Conv2d_0       [1, 16, 5, 5]  [32, 16, 28, 28]   416.0    313.6k\n1_model.MaxPool2d_1                -  [32, 16, 14, 14]       -         -\n2_model.Conv2d_2      [16, 32, 3, 3]  [32, 32, 14, 14]   4.64k  903.168k\n3_model.MaxPool2d_3                -    [32, 32, 7, 7]       -         -\n4_model.Flatten_4                  -        [32, 1568]       -         -\n5_model.LazyLinear_5      [1568, 50]          [32, 50]  78.45k     78.4k\n6_model.ReLU_6                     -          [32, 50]       -         -\n7_model.LazyLinear_7        [50, 10]          [32, 10]   510.0     500.0\n--------------------------------------------------------------------------\n                         Totals\nTotal params            84.016k\nTrainable params        84.016k\nNon-trainable params        0.0\nMult-Adds             1.295668M\n==========================================================================",
+        "type": "stdout"
+    }
+]

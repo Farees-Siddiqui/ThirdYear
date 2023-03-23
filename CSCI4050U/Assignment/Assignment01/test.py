@@ -29,7 +29,7 @@ def create_dataset(df):
 # Use the built-in nn.Linear(...) as a layer in your module.
 # You must name the attribute in the LinearClassifier as linear for you to pass the checkpoint.
 
-the output should look like the following
+# the output should look like the following
 # ===================================================== │                                                                 │
 # │ ╰───────────────────╯ │          Kernel Shape Output Shape  Params  Mult-Adds │                                                                 │
 # │                       │ Layer                                                 │                                                                 │
