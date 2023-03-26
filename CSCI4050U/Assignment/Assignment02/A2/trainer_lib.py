@@ -29,6 +29,7 @@ class Trainer:
             loss = self.loss(y_out, targets)
             self.optimizer.zero_grad()
             loss.backward()
+            self.optimizer.step()
             acc = self.categorical_accuracy(y_out, targets)
             l_list.append(loss.item())
             acc_list.append(acc)
@@ -45,7 +46,7 @@ class Trainer:
                 acc = self.categorical_accuracy(y_out, targets)
                 l_list.append(loss.item())
                 acc_list.append(acc)
-        return np.mean(l_list), np.mean(acc.item())
+        return np.mean(l_list), np.mean(acc_list)
 
     def train(self, epochs, max_batches=None):
         history = {
@@ -80,5 +81,6 @@ class Trainer:
         return pd.DataFrame(history)
 
     def reset(self):
-        self.model.reset_parameters()
-        self.optimizer = optim.Adam(self.model.parameters())
+        for layer in self.model.children():
+           if hasattr(layer, 'reset_parameters'):
+               layer.reset_parameters()
