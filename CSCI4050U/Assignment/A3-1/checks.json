@@ -1,0 +1,130 @@
+[
+    {
+        "id": "fc1f153f-1d65-4274-824e-93e2b03c0ee4",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "check tokenizer",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "['csci', '4050u', 'is', 'an', 'introduction', 'to', 'machine', 'learning', '.']",
+        "type": "execute_result"
+    },
+    {
+        "id": "ba8074b4-697b-4fce-8eb4-c575af9d25f7",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "check token iterator",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "['bromwell', 'high', 'is', 'a', 'cartoon', 'comedy', '.', 'it', 'ran', 'at']\n['story', 'of', 'a', 'man', 'who', 'has', 'unnatural', 'feelings', 'for', 'a']",
+        "type": "stdout"
+    },
+    {
+        "id": "b1f89e5f-c0f4-49c0-ad84-694e2c8006cb",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "load the vocabulary",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "Vocab()",
+        "type": "execute_result"
+    },
+    {
+        "id": "d88339ff-b4b0-4f03-8b90-27f51b31228d",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "check vocabulary length",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "2000",
+        "type": "execute_result"
+    },
+    {
+        "id": "b4339746-9347-48fc-92f7-a2963cf9f07f",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "verify the first ten tokens in the vocabulary",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "['<pad>', '<unk>', '<start>', 'the', '.', 'and', 'a', 'of', 'to', 'is']",
+        "type": "execute_result"
+    },
+    {
+        "id": "016cb114-9554-47ef-be1a-88fb7710b161",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "verify the encodings by the vocabulary",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "[1, 179, 53, 21, 1]",
+        "type": "execute_result"
+    },
+    {
+        "id": "bd20e3e1-e2e8-4a65-a2ba-137e1122c8a2",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "check dataset",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "(tensor([   1,  311,    9,    6, 1053,  210,    4,   11,    1,   35,    3,  174,\n           60,   18,   52,   84,    1,   47,  385,  113,  143,   18,    1,    4,\n           63,  157,   12,    3,    1,    1,  478,   74,    8,  263,   15,    1,\n          311,   16, 1985,    9,   77,    1,    8,  616,   76,    9,    1,    4,\n            3,    1,    8, 1994,    1,    3,    1, 1507,   39,   54,   69,  207,\n          148,   70, 1205,    1,    1,    3,    1,    7,    3,  224,  886,   34,\n            1,   74,    7,    3,    1,   13,  690,    5,   70, 1507,    4,   57,\n           13,  219,    3,  386,   12,   65,    6, 1411,    1,  787,    8,    1,\n          183,    3,  385,   13]),\n tensor(1))",
+        "type": "execute_result"
+    },
+    {
+        "id": "a67f724a-33fe-4741-8a0f-eb16c434d4b5",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "check npz file size.",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "File size = 19 MB",
+        "type": "stdout"
+    }
+]
