@@ -1,0 +1,7 @@
+﻿  main.cpp
+C:\Users\faree\Documents\School\ThirdYear\CSCI3090U\LectureExamples\VisualStudio\Example10\main.cpp(153,38): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\faree\Documents\School\ThirdYear\CSCI3090U\LectureExamples\VisualStudio\Example10\main.cpp(190,36): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\faree\Documents\School\ThirdYear\CSCI3090U\LectureExamples\VisualStudio\Example10\main.cpp(196,38): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\faree\Documents\School\ThirdYear\CSCI3090U\LectureExamples\VisualStudio\Example10\main.cpp(204,36): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\faree\Documents\School\ThirdYear\CSCI3090U\LectureExamples\VisualStudio\Example10\main.cpp(416,30): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
+  Example10.vcxproj -> C:\Users\faree\Documents\School\ThirdYear\CSCI3090U\LectureExamples\VisualStudio\Example10\x64\Debug\Example10.exe
