@@ -394,7 +394,7 @@ int main(int argc, char **argv) {
 	 *  there are two programs, one for the background
 	 *  and one for the sphere
 	 */
-	sprintf(vertexName, "../srcexample12%s.vs", vertex);
+	sprintf(vertexName, "../src/example12%s.vs", vertex);
 	vs = buildShader(GL_VERTEX_SHADER, vertexName);
 	sprintf(fragmentName, "../src/example12%s.fs", fragment);
 	fs = buildShader(GL_FRAGMENT_SHADER, fragmentName);
