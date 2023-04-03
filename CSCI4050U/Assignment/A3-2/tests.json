@@ -1,0 +1,50 @@
+[
+    {
+        "id": "266639d3-25c6-4e48-968f-bde8d880572d",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "data integrity",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "Review: one of the very best three <unk> <unk> ever . a <unk> house full of evil guys and the <unk> <unk> the <unk> detective <unk> s best men . <unk> is in top form in the famous in the dark scene . <unk> <unk> provides excellent support in his mr . <unk> role as the <unk> of a murder plot . before it s over <unk> s <unk> little <unk> is <unk> to great effect . this minute gem moves about as fast as any <unk> s short and <unk> twice the <unk> . highly recommended . <pad> <pad> <pad>\nLabel: 1",
+        "type": "stdout"
+    },
+    {
+        "id": "f44b82cd-984f-4eed-a08a-f3b090aad4c0",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "verify model output",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "torch.Size([128, 2])",
+        "type": "execute_result"
+    },
+    {
+        "id": "e2c52b93-0fe5-4a9b-a2bd-fe6ec72403d5",
+        "directives": {
+            "solution": null,
+            "masterOnly": null,
+            "workUnit": null,
+            "check": true,
+            "test": null,
+            "title": "verify dataframe columns",
+            "grade": 1.0,
+            "match": null,
+            "normalize": null
+        },
+        "text": "Index(['train_loss', 'train_acc'], dtype='object')",
+        "type": "execute_result"
+    }
+]
