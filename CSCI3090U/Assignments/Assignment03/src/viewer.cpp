@@ -42,8 +42,12 @@ GLuint objVAO;
 GLuint cubeVAO;
 GLuint objBuffer;
 GLuint cubeBuffer;
+GLuint cubeBuffer2;
 int triangles;
 GLuint envMap;
+GLuint irridanceMap;
+
+char* file;
 
 /*
  *  Create a cube object that will be the background
@@ -99,6 +103,10 @@ void background() {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes, GL_STATIC_DRAW);
 
+	glGenBuffers(1, &cubeBuffer2);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeBuffer2);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes, GL_STATIC_DRAW);
+
 	glUseProgram(program2);
 	vPosition = glGetAttribLocation(program2, "vPosition");
 	glVertexAttribPointer(vPosition, 4, GL_FLOAT, GL_FALSE, 0, 0);
@@ -133,6 +141,8 @@ void init() {
 	double x, y, z;
 	double theta, phi;
 	struct Cube *texture;
+	struct Cube *texture2;
+
 
 	glGenVertexArrays(1, &objVAO);
 	glBindVertexArray(objVAO);
@@ -242,6 +252,22 @@ void init() {
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
+	if (strcmp(file, "b") == 0 || strcmp(file, "c") == 0)
+	{
+		texture2 = loadCube("../VancouverConventionCentreBlurred");
+		glGenTextures(1, &irridanceMap);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, irridanceMap);
+		for (i = 0; i < 6; i++) {
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA, texture2->width, texture2->height,
+				0, GL_RGB, GL_UNSIGNED_BYTE, texture2->data[i]);
+		}
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	}
 
 }
 
@@ -293,6 +319,12 @@ void display(void) {
 	glBindTexture(GL_TEXTURE_CUBE_MAP, envMap);
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
 
+	if (strcmp(file, "b") == 0 || strcmp(file, "c") == 0) {
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeBuffer2);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, irridanceMap);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
+	}
+
 	glUseProgram(program);
 
 	/*
@@ -321,13 +353,13 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 
-	if (key == GLFW_KEY_A && action == GLFW_REPEAT)
+	if (key == GLFW_KEY_A && action == GLFW_PRESS)
 		phi += 0.1;
-	if (key == GLFW_KEY_D && action == GLFW_REPEAT)
+	if (key == GLFW_KEY_D && action == GLFW_PRESS)
 		phi -= 0.1;
-	if (key == GLFW_KEY_W && action == GLFW_REPEAT)
+	if (key == GLFW_KEY_W && action == GLFW_PRESS)
 		theta += 0.1;
-	if (key == GLFW_KEY_S && action == GLFW_REPEAT)
+	if (key == GLFW_KEY_S && action == GLFW_PRESS)
 		theta -= 0.1;
 
 	eyex = (float)(r*sin(theta)*cos(phi));
@@ -350,6 +382,8 @@ int main(int argc, char **argv) {
 	char *fragment;
 	char *vertex;
 	GLFWwindow *window;
+	file = argv[2];
+	printf("file = %s\n", file);
 
 	glfwSetErrorCallback(error_callback);
 
@@ -394,7 +428,7 @@ int main(int argc, char **argv) {
 	 *  there are two programs, one for the background
 	 *  and one for the sphere
 	 */
-	sprintf(vertexName, "../srcexample12%s.vs", vertex);
+	sprintf(vertexName, "../src/example12%s.vs", vertex);
 	vs = buildShader(GL_VERTEX_SHADER, vertexName);
 	sprintf(fragmentName, "../src/example12%s.fs", fragment);
 	fs = buildShader(GL_FRAGMENT_SHADER, fragmentName);
@@ -402,7 +436,7 @@ int main(int argc, char **argv) {
 	vs = buildShader(GL_VERTEX_SHADER, (char*)"../src/cube.vs");
 	fs = buildShader(GL_FRAGMENT_SHADER, (char*)"../src/cube.fs");
 	program2 = buildProgram(vs, fs, 0);
-	dumpProgram(program, (char*)"Example 10 shader program");
+	dumpProgram(program2, (char*)"Example 10 shader program");
 	init();
 	background();
 
