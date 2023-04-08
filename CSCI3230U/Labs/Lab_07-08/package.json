@@ -1,0 +1,14 @@
+{
+  "name": "lab_07-08",
+  "version": "1.0.0",
+  "description": "lab07_08",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Farees Siddiqui",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
