@@ -9,6 +9,7 @@
   "author": "Farees Siddiqui",
   "license": "ISC",
   "dependencies": {
+    "bulma-calendar": "^6.1.19",
     "express": "^4.18.2"
   }
 }

@@ -2,3 +2,28 @@
     padding-left: 30vw;
     padding-right: 30vw;
 }
+
+#inForm {
+    padding-left: auto;
+    padding-right: auto;
+    padding-top: 5vh;
+}
+
+.date {
+    padding-top: 0.5vh;
+    padding-left: 2.5vw;
+}
+
+.submit {
+    padding-top: 0.5vh;
+    padding-left: 3vw;
+}
+
+.fa-angle-down {
+    color: rgb(50, 115, 220);
+}
+
+.out {
+    padding-left: auto;
+    padding-right: auto;
+}

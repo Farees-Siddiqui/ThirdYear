@@ -7,19 +7,36 @@ const { readFile } = require('fs').promises;
 
 app.use(express.static('public'));
 
-const imdb_id = 'tt0059113';
+app.get('/', (req, res) => {
+  res.redirect('showtimes.html');
+})
 
-app.get('/', async (request, response) => {
-
-    response.send(await readFile('./showtimes.html', 'utf8'));
-
+app.use((req, res, next) => {
+  if (req.url.endsWith('.css')) {
+    res.setHeader('Content-Type', 'text/css');
+  }
+  next();
 });
+
 
 app.listen(process.env.PORT || 3000, () => console.log(`App available on http://localhost:3000`))
 
-// get the json data from this api and print it to the console: "http://www.omdbapi.com/?i=${tt0059742}&apikey=${575d742d}"
+app.get('/showtimes.json', (req, res) => {
+  readFile('showtimes.json', 'utf8')
+    .then(data => {
+      res.setHeader('Content-Type', 'application/json');
+      res.send(data);
+      console.log(data);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    });
+});
 
-// const options = {
+
+
+  // const options = {
 //     hostname: 'www.omdbapi.com',
 //     port: 443,
 //     path: '/?i='+imdb_id+'&apikey=575d742d',
