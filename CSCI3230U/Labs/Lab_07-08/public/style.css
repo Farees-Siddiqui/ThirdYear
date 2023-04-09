@@ -7,6 +7,11 @@
     padding-left: auto;
     padding-right: auto;
     padding-top: 5vh;
+    margin-left: 5vw;
+}
+
+#outForm {
+    margin-top: 5vh;
 }
 
 .date {
@@ -26,8 +31,4 @@
 .out {
     padding-left: auto;
     padding-right: auto;
-}
-
-#inForm {
-    margin-left: 5vw;
 }
