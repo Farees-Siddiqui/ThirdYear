@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/test.dir/Main.c.o  -o test  /usr/lib/x86_64-linux-gnu/libOpenCL.so 

@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/matMulParallel.dir/matrix_mult_parallel.c.o  -o matMulParallel  /usr/lib/x86_64-linux-gnu/libOpenCL.so 

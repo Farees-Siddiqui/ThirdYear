@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/faree/Documents/School/ThirdYear/CSCI4060U/Labs/Lab08/matrix_mult_parallel.c
+fcntl.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+math.h
+-
+unistd.h
+-
+sys/types.h
+-
+sys/stat.h
+-
+CL/cl.h
+-
+

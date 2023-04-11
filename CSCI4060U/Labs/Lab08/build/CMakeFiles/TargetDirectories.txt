@@ -1,0 +1,3 @@
+/mnt/c/Users/faree/Documents/School/ThirdYear/CSCI4060U/Labs/Lab08/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/faree/Documents/School/ThirdYear/CSCI4060U/Labs/Lab08/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/faree/Documents/School/ThirdYear/CSCI4060U/Labs/Lab08/build/CMakeFiles/test.dir
