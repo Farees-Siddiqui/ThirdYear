@@ -47,8 +47,6 @@ def get_review_dataset(df, voc, max_length):
     tokenized_reviews = [tokenize(review) for review in reviews]
     truncated_reviews = [truncate(review, max_length) for review in tokenized_reviews]
     encoded_reviews = [voc(review) for review in truncated_reviews]
-    print(type(encoded_reviews))
-    print("encoded_reviews: ", encoded_reviews[0])
     tensor_reviews = to_tensor(encoded_reviews, padding_value=voc['<pad>'])
     tensor_labels = torch.tensor(labels)
     dataset = TensorDataset(tensor_reviews, tensor_labels)
