@@ -13,6 +13,7 @@ copyDivisible:
     
     mov r15, [rsi]
     mov r14, rdx
+    mov r13, rdi
 
     mov rdx, 0
     mov rax, r15
@@ -25,12 +26,13 @@ copyDivisible:
     mov rdi, outputDisplayFormat
     mov rsi, r15 
     mov rdx, [rcx]
+    mov rax, 0
     push rbx
     call printf
     pop rbx
 
-    mov [rdi], r15
-    inc rdi
+    mov [r13], r15
+    add r13, 8
     jmp copyDivisible
 
 skip:
